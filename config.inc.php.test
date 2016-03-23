@@ -1,0 +1,29 @@
+<?php
+define('APPROOT',dirname(__FILE__));
+
+//设置include包含文件所在的所有目录
+$include_path=get_include_path();
+$include_path.=PATH_SEPARATOR.APPROOT."/lib";
+$include_path.=PATH_SEPARATOR.APPROOT."/model";
+$include_path.=PATH_SEPARATOR.APPROOT."/class";
+set_include_path($include_path);
+
+//包含class,model文件夹中的所有.class.php文件
+foreach(new FilesystemIterator(APPROOT."/model", FilesystemIterator::SKIP_DOTS ) as $classfile) {
+    require_once($classfile);
+}
+foreach(new FilesystemIterator(APPROOT."/class", FilesystemIterator::SKIP_DOTS ) as $classfile) {
+    require_once($classfile);
+}
+
+//默认时区
+date_default_timezone_set('Asia/Shanghai');
+
+//mysql地址
+$GLOBALS['MYSQL'] = array(
+    'host'=>'localhost',
+    'port'=>'3306',
+    'db'=>'xnews',
+    'user'=>'username',
+    'passwd'=>'passwd'
+);
