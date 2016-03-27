@@ -8,7 +8,8 @@ set_include_path($include_path);
 
 //包涵核心文件
 require_once(APPROOT . '/core/DB.php');
-require_once(APPROOT . '/core/View.php');
+require_once(APPROOT . '/core/Model.php');
+require_once(APPROOT . '/core/Request.php');
 require_once(APPROOT . '/core/Controller.php');
 
 //包涵model文件

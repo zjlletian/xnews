@@ -1,6 +1,9 @@
 <?php
 require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
-class AdminModel {
+class AdminModel extends Model{
 
+    function __construct() {
+        parent::__construct('admin');
+    }
 }

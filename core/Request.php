@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
-class View{
+class Request{
 
     //页面数据
     private static $data=array();
@@ -15,10 +15,9 @@ class View{
     static function get($key){
         return self::$data[$key];
     }
-    
-    //显示页面
-    static function show($view){
-        $page=APPROOT.'/view/'.$view.'.view.php';
-        include($page);
+
+    //获取http请求类型
+    protected static function getMethod(){
+        return $_SERVER['REQUEST_METHOD'];
     }
 }

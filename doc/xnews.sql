@@ -1,18 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : zhou-vm
-Source Server Version : 50629
-Source Host           : 192.168.1.105:3306
-Source Database       : xnews
-
-Target Server Type    : MYSQL
-Target Server Version : 50629
-File Encoding         : 65001
-
-Date: 2016-03-23 22:23:54
-*/
-
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------

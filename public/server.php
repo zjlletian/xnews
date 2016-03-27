@@ -38,14 +38,16 @@ else{
     die('controller file not exist: '.$actionfile);
 }
 
-//检查并执行controller::method
+//检查并执行controller->method()
 $instance=$controller.'Controller';
 if(! class_exists($instance)){
     http_response_code(400);
     die('controller class not exist: '.$instance);
 }
-if(! is_callable(array($instance, $method ))){
+if(! is_callable(array($instance, $method))){
     http_response_code(400);
-    die('controller method not exist: '.$instance.'::'.$method);
+    die('controller method not exist: '.$instance.'->'.$method.'()');
 }
-$instance::$method();
+session_start();
+$instance = new $instance();
+$instance->$method();

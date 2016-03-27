@@ -16,21 +16,24 @@ class DB {
         }
     }
 
-    //请求数据库，直接返回结果
+    //请求数据库，返回结果 bool 或 array
     static function query($sql) {
         self::connect();
-        return mysqli_query(self::$mycon, $sql);
-    }
-
-    //请求数据库，返回数组
-    static function queryForArray($sql) {
-        self::connect();
+        $result=mysqli_query(self::$mycon, $sql);
+        if(is_bool($result)){
+            return $result;
+        }
         $resultarry=array();
-        $result= mysqli_query(self::$mycon, $sql);
         while($item=mysqli_fetch_assoc($result)){
             $resultarry[]=$item;
         }
         $result->free();
         return $resultarry;
+    }
+
+    //替换特殊字符
+    static function escape($str){
+        self::connect();
+        return mysqli_real_escape_string(self::$mycon,$str);
     }
 }
