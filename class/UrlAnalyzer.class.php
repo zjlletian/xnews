@@ -36,7 +36,8 @@ class UrlAnalyzer{
 					throw new Exception("doctype is not html.");
 				}
 				//如果能够从HtmlHead中的meta标签获取charset则直接交给pq处理，否则使用header或函数检测charset并转换为utf-8
-				if (self::contentTypeFromMeta($htmltext)[1]== null) {
+				$autodetect = self::contentTypeFromMeta($htmltext)[1];
+				if ($autodetect == null) {
 					$charset = '';
 					//使用HttpHeader中的ContentType获取chaeset
 					foreach (explode(";", $contentType) as $ct) {
@@ -58,8 +59,12 @@ class UrlAnalyzer{
 						$htmltext = mb_convert_encoding($htmltext, 'UTF-8', $charset);
 					}
 				}
+				else{
+					$htmltext = preg_replace('@<meta[^>]+http-equiv\\s*=\\s*(["|\'])Content-Type\\1([^>]+?)>@i','', $htmltext);
+					$htmltext = mb_convert_encoding($htmltext, 'UTF-8', $autodetect);
+				}
 			}
-			//phpQuery不会过滤js与css，需要手动去除。
+			//过滤js与css
 			$reg=array("/<script[^>]*?>.*?<\/script>/", "/<style[^>]*?>.*?<\/style>/");
 			$htmltext = preg_replace($reg," ", $htmltext);
 		}
@@ -96,7 +101,11 @@ class UrlAnalyzer{
 	}
 
 	//从html提取内容
-	static function htmlExtract($htmltext, $titleRule, $contentRule){
+	static function getInfo($url, $titleRule, $contentRule, $imgRules){
+		$htmltext=self::getHtml($url);
+		if($htmltext==null){
+			return null;
+		}
 		$urlinfo=array();
 		$htmldom= phpQuery::newDocument($htmltext);
 
@@ -114,9 +123,38 @@ class UrlAnalyzer{
 		$content=preg_replace("/[\s]+/","",$content);
 		$urlinfo['content']=str_replace("</p>","</p>\n",$content);
 
+		//提取图片
+		$imgs=array();
+		foreach ($htmldom[$imgRules] as $img){
+			$imgs[]=$img->getAttribute('src');
+		}
+		$urlinfo['images'] = implode("\r\n",$imgs);
+
 		//清理phpquery
 		phpQuery::$documents = array();
 		return $urlinfo;
+	}
+
+	//从html中获取url
+	static function getUrls($url, $urlRule){
+		$links=array();
+		$htmltext=self::getHtml($url);
+		$htmldom= phpQuery::newDocument($htmltext);
+		$baseurl=self::urlSplit($url);
+		foreach ($htmldom['a'] as $a){
+			$href=$a->getAttribute('href');
+			$link=self::transformHref($href, $baseurl);
+			if($link!=false && !in_array($link,$links)){
+				$links[]=$link;
+			}
+		}
+		$result=array();
+		foreach ($links as $link){
+			if(preg_match_all($urlRule,$link,$matche)){
+				$result[]=$link;
+			}
+		}
+		return $result;
 	}
 
 	//将url拆分,返回：协议，主机地址，路径，文档名，参数
