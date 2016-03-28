@@ -1,11 +1,6 @@
 <?php
 define('APPROOT',dirname(__FILE__));
 
-//设置include包含文件所在的所有目录
-$include_path=get_include_path();
-$include_path.=PATH_SEPARATOR.APPROOT."/lib";
-set_include_path($include_path);
-
 //包涵核心文件
 require_once(APPROOT . '/core/DB.php');
 require_once(APPROOT . '/core/Model.php');
