@@ -3,8 +3,7 @@ require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
 //获取访问路径
 if(!isset($_GET['_querypath'])) {
-    http_response_code(403);
-    die("can't request server.php directly, valid request path example : /controller/method?args=xxx");
+    (new Controller())->redirect("/");
 }
 $querypath = $_GET['_querypath'];
 unset($_GET['_querypath']);
