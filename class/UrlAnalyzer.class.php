@@ -65,8 +65,8 @@ class UrlAnalyzer{
 				}
 			}
 			//过滤js与css
-			$reg=array("/<script[^>]*?>.*?<\/script>/", "/<style[^>]*?>.*?<\/style>/");
-			$htmltext = preg_replace($reg," ", $htmltext);
+			$reg=array('@<script[^>]*?>.*?</script>@','@<style[^>]*?>.*?</style>@');
+			$htmltext = preg_replace($reg,'', $htmltext);
 		}
 		catch(Exception $e) {
 			$htmltext=null;
@@ -102,10 +102,18 @@ class UrlAnalyzer{
 
 	//从html提取内容
 	static function getInfo($url, $titleRule, $contentRule, $imgRules){
+
+		//获取html,尝试四次
 		$htmltext=self::getHtml($url);
+		$count=0;
+		while($htmltext == null && $count<3) {
+			$htmltext=self::getHtml($url);
+			$count++;
+		}
 		if($htmltext==null){
 			return null;
 		}
+
 		$urlinfo=array();
 		$htmldom= phpQuery::newDocument($htmltext);
 
@@ -137,8 +145,18 @@ class UrlAnalyzer{
 
 	//从html中获取url
 	static function getUrls($url, $urlRule){
-		$links=array();
+		//获取html,尝试四次
 		$htmltext=self::getHtml($url);
+		$count=0;
+		while($htmltext == null && $count<3) {
+			$htmltext=self::getHtml($url);
+			$count++;
+		}
+		if($htmltext==null){
+			return null;
+		}
+
+		$links=array();
 		$htmldom= phpQuery::newDocument($htmltext);
 		$baseurl=self::urlSplit($url);
 		foreach ($htmldom['a'] as $a){

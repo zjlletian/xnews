@@ -2,6 +2,7 @@
 require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
 class Controller{
+    
     //显示视图页面
     protected function view($view){
         $page=APPROOT.'/view/'.$view.'.view.php';

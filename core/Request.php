@@ -17,7 +17,7 @@ class Request{
     }
 
     //获取http请求类型
-    protected static function getMethod(){
+    static function method(){
         return $_SERVER['REQUEST_METHOD'];
     }
 }
