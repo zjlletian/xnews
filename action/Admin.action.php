@@ -14,7 +14,7 @@ class AdminController extends Controller{
 
     //规则测试预览
     function preview(){
-        Request::put('article',UrlAnalyzer::getInfo($_GET['u'], str_replace('〇','#',$_GET['t']), str_replace('〇','#',$_GET['c']), str_replace('〇','#',$_GET['i'])));
+        Request::put('article',UrlAnalyzer::getInfo($_POST['u'], $_POST['t'], $_POST['c'], $_POST['i']));
         $this->view('admin/preview');
     }
 }

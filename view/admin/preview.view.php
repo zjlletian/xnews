@@ -12,6 +12,8 @@
 
 <body>
     <h1><?php echo $article['title']?></h1>
+    <a href="<?php echo $_POST['u']?>" target="_blank">原链接： <?php echo $_POST['u']?></a>
+    <br>
     <?php
         echo $article['content'];
         $imgs=explode("\n",$article["images"]);

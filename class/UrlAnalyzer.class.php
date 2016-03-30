@@ -65,7 +65,7 @@ class UrlAnalyzer{
 				}
 			}
 			//过滤js与css
-			$reg=array('@<script[^>]*?>.*?</script>@','@<style[^>]*?>.*?</style>@');
+			$reg=array("'<script[^>]*?>.*?</script>'si", "'<style[^>]*?>.*?</style>'si");
 			$htmltext = preg_replace($reg,'', $htmltext);
 		}
 		catch(Exception $e) {

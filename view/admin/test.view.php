@@ -11,28 +11,50 @@
 
 <body>
     <form action="/admin/test" method="post">
-        源 地 址 ：<input type='text' name='sourceurl' value="<?php echo $_POST['sourceurl']?>" style='width:500px'/>
-        新浪娱乐示例：http://ent.sina.com.cn/<br><br>
-        链接规则：<input type='text' name='urlrule' value="<?php echo $_POST['urlrule']?>" style='width:500px'/>
-         ^http://ent.sina.com.cn/(\w+)/(\w+)/(\d{4}-\d{2}-\d{2})/doc-(.*)$<br><br>
-        标题规则：<input type='text' name='titlerule' value="<?php echo $_POST['titlerule']?>" style='width:500px'/>
-         #main_title<br><br>
-        正文规则：<input type='text' name='contentrule' value="<?php echo $_POST['contentrule']?>" style='width:500px'/>
-         #artibody p<br><br>
-        标题规则：<input type='text' name='imgrule' value="<?php echo $_POST['imgrule']?>" style='width:500px'/>
-         #artibody .img_wrapper img<br><br>
-        <input type="submit" value='生成规则预览'><br><br>
+        源 地 址 ：<input type='text' name='sourceurl' value="<?php echo $_POST['sourceurl']?>" style='width:500px' id="s"/>
+        <br><br>
+        链接规则：<input type='text' name='urlrule' value="<?php echo $_POST['urlrule']?>" style='width:500px' id="u"/>
+        <br><br>
+        <input type="submit" value="分析子链接">&nbsp;<input type="button" value="新浪娱乐示例" onclick="example()">
+        <br><hr>
+        标题规则：<input type='text'  id='t' name='t' value="<?php echo $_POST['t']?>" style='width:500px'/>
+        <br><br>
+        正文规则：<input type='text'  id='c' name='c' value="<?php echo $_POST['c']?>" style='width:500px'/>
+       <br><br>
+        图片规则：<input type='text' id='i' name='i' value="<?php echo $_POST['i']?>" style='width:500px'/>
     </form>
-
+    <br>
     <?php
-        $t=str_replace("#","〇",$_POST['titlerule']);
-        $c=str_replace("#","〇",$_POST['contentrule']);
-        $i=str_replace("#","〇",$_POST['imgrule']);
         if (Request::method()=="POST"){
             foreach (Request::get('urllist') as $url){
-                echo "<a href='{$url}' target='_blank'>原网页</a> <a href='/admin/preview?u={$url}&t={$t}&c={$c}&i={$i}' target='_blank'>{$url}</a><br>";
+                echo "<a onclick='doprevew(\"{$url}\")' href='javascript:void(0)'>{$url}</a><br>";
             }
         }
     ?>
+    <form action='/admin/preview' method="post" target="_blank" id='preview'>
+        <input type='hidden' name="u" id='uh'>
+        <input type='hidden' name="t" id='th'>
+        <input type='hidden' name="c" id='ch'>
+        <input type='hidden' name="i" id='ih'>
+    </form>
+
+    <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        function example(){
+            $('#s').val("http://ent.sina.com.cn/");
+            $('#u').val("^http://ent.sina.com.cn/(\\w+)/(\\w+)/(\\d{4}-\\d{2}-\\d{2})/doc-(.*)$");
+            $('#t').val("#main_title");
+            $('#c').val("#artibody p");
+            $('#i').val("#artibody .img_wrapper img");
+        }
+
+        function doprevew(url){
+            $('#uh').val(url);
+            $('#th').val($('#t').val());
+            $('#ch').val($('#c').val());
+            $('#ih').val($('#i').val());
+            $('#preview').submit();
+        }
+    </script>
 </body>
 </html>
