@@ -29,7 +29,9 @@ abstract class Model{
         if(count($result)<1){
             return null;
         }
-        return $result[0];
+        else{
+            return $result[0];
+        }
     }
 
     //根据ID更新
@@ -45,5 +47,10 @@ abstract class Model{
     //根据ID删除
     function delete($id){
         return DB::query("DELETE FROM `{$this->tname}` WHERE id={$id} ");
+    }
+
+    //where查找
+    function where($where){
+        return DB::query("SELECT * FROM `{$this->tname}` WHERE {$where} ");
     }
 }

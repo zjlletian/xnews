@@ -5,7 +5,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Xnews</title>
+    <title>Xnews 规则测试</title>
     <meta charset="utf-8">
 </head>
 
