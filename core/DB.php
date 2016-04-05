@@ -13,6 +13,14 @@ class DB {
             if(mysqli_connect_error()!=null) {
                 die(mysqli_connect_error());
             }
+            if(isset($GLOBALS['MYSQL']['charset'])){
+                mysqli_query(self::$mycon,"set character set '{$GLOBALS['MYSQL']['charset']}' ");
+                mysqli_query(self::$mycon,"set names '{$GLOBALS['MYSQL']['charset']}' ");
+            }
+            else{
+                mysqli_query(self::$mycon,"set character set 'utf8' ");
+                mysqli_query(self::$mycon,"set names 'utf8' ");
+            }
         }
     }
 

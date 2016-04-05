@@ -4,4 +4,11 @@
 date_default_timezone_set('Asia/Shanghai');
 
 //mysql地址
-$GLOBALS['MYSQL'] = array( 'host'=>'localhost', 'port'=>'3306', 'db'=>'xnews', 'user'=>'root', 'passwd'=>'passwd' );
+$GLOBALS['MYSQL'] = array(
+    'host'=>'localhost',
+    'port'=>'3306',
+    'db'=>'xnews',
+    'user'=>'root',
+    'passwd'=>'passwd',
+    'charset'=>'utf8'
+);

@@ -50,7 +50,14 @@ abstract class Model{
     }
 
     //where查找
-    function where($where){
-        return DB::query("SELECT * FROM `{$this->tname}` WHERE {$where} ");
+    function getlist($where=null,$options=null){
+        $sql="SELECT * FROM `{$this->tname}` ";
+        if($where!=null){
+            $sql.="WHERE {$where} ";
+        }
+        if($options!=null){
+            $sql.=$options;
+        }
+        return DB::query($sql);
     }
 }

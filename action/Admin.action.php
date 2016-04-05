@@ -31,6 +31,42 @@ class AdminController extends Controller{
         $this->view('admin/login');
     }
 
+    //源管理页面
+    function source(){
+        $model=new SourceModel();
+        $list=$model->getlist();
+        Request::put('list',$list);
+        $this->view('admin/source');
+    }
+
+    //分类管理
+    function tags(){
+        $model=new TagsModel();
+        $list=$model->getlist();
+        Request::put('list',$list);
+    }
+
+    //文章列表
+    function article(){
+        $model=new ArticleModel();
+        $list=$model->getlist();
+        Request::put('list',$list);
+    }
+
+    //用户管理
+    function users(){
+        $model=new UserInfoModel();
+        $list=$model->getlist();
+        Request::put('list',$list);
+    }
+
+    //评论管理
+    function comments(){
+        $model=new CommentsModel();
+        $list=$model->getlist();
+        Request::put('list',$list);
+    }
+
     //规则测试页面
     function test() {
         $this->checklogin();
