@@ -38,7 +38,7 @@ abstract class Model{
     function update($id,$data){
         $kvs=array();
         foreach ($data as $k=>$v){
-            $ks[]="`{$k}` = '".DB::escape($v)."'";
+            $kvs[]="`{$k}` = '".DB::escape($v)."'";
         }
         $kvs=implode(",",$kvs);
         return DB::query("UPDATE {$this->tname} SET {$kvs} WHERE id={$id}");

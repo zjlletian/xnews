@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Xnews 规则预览</title>
-    <?php include(APPROOT.'/public/head.php');?>
+    <?php include(APPROOT . '/view/template/head.php');?>
 </head>
 
 <body>

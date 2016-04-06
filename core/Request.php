@@ -6,6 +6,10 @@ class Request{
     //页面数据
     private static $data=array();
 
+    //请求的路径
+    public static $queryController;
+    public static $queryMethod;
+
     //存入值
     static function put($key,$value){
         self::$data[$key]=$value;

@@ -17,7 +17,7 @@ class Util{
 	}
 
 	//时间格式化
-	static function timestr($time){
+	static function timestr($time=null){
 		if($time!=null){
 			return date("Y-m-d H:i:s",$time);
 		}

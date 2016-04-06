@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Xnews 管理员登陆</title>
-    <?php include(APPROOT.'/public/head.php');?>
+    <?php include(APPROOT . '/view/template/head.php');?>
 </head>
 
 <body>

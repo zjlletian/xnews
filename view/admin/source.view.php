@@ -5,7 +5,7 @@
 
 <head>
     <title>Xnews源管理</title>
-    <?php include(APPROOT.'/public/head.php');?>
+    <?php include(APPROOT . '/view/template/head.php');?>
 </head>
 
 <body>
@@ -17,7 +17,7 @@
             </div>
             <div class="modal-body">
                 <form id="ruleform" method="post" target="_blank" action="/admin/test">
-                        <input type='hidden' name='sid'/>
+                        <input type='hidden' name='sid' id="sid"/>
                         <label class="formlabel">源链标题</label><input type='text' id='alias' name='alias' class="form-control input-sm"/>
                         <label class="formlabel">源链地址</label><input type='text' id='url' name='url' class="form-control input-sm"/>
                         <label class="formlabel">子链正则</label><input type='text' id='urlrule' name='urlrule' class="form-control input-sm"/>
@@ -60,7 +60,7 @@
                         <td><?php echo $item['updatetime']==0?'未采集':Util::timestr($item['updatetime']);?></td>
                         <td>
                             <a href="javascript:showinfo(<?php echo $item['id']?>)">详情</a>
-                            <a href="/admin/test?sid=<?php echo $item['id']?>">删除</a>
+                            <a href="javascript:delsource(<?php echo $item['id']?>)">删除</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -72,8 +72,10 @@
 
 <script type="text/javascript">
     $(function(){
-        $('#myModal').on('hidden.bs.modal', function (e) {
+        $('#tag').val(<?php echo Request::get('tags')['0']['id']?>);
+        $('#myModal').on('hidden.bs.modal', function() {
             $('#ruleform')[0].reset();
+            $('#tag').val(<?php echo Request::get('tags')['0']['id']?>);
             $('#btn_add').css('display','');
             $('#btn_mod').css('display','none');
             $('#myModalLabel').html('添加源规则');
@@ -87,6 +89,7 @@
                 alert(data.msg);
             }
             else{
+                alert('添加成功');
                 location.reload();
             }
         });
@@ -95,18 +98,24 @@
     //显示详情
     function showinfo(id){
         $.get('/source/get?sid='+id,function(data){
-
-            $('#alias').val(data.alias);
-            $('#url').val(data.url);
-            $('#urlrule').val(data.urlrule);
-            $('#titlerule').val(data.titlerule);
-            $('#contentrule').val(data.contentrule);
-            $('#imagerule').val(data.imagerule);
-            $('#tag').val(data.tag_id);
-            $('#btn_add').css('display','none');
-            $('#btn_mod').css('display','');
-            $('#myModalLabel').html('修改源规则');
-            $('#myModal').modal('show');
+            if(data!=null){
+                $('#sid').val(id);
+                $('#alias').val(data.alias);
+                $('#url').val(data.url);
+                $('#urlrule').val(data.urlrule);
+                $('#titlerule').val(data.titlerule);
+                $('#contentrule').val(data.contentrule);
+                $('#imagerule').val(data.imagerule);
+                $('#tag').val(data.tag_id);
+                $('#btn_add').css('display','none');
+                $('#btn_mod').css('display','');
+                $('#myModalLabel').html('修改源规则');
+                $('#myModal').modal('show');
+            }
+            else{
+                alert('源不存在');
+                return false;
+            }
         });
     }
 
@@ -117,6 +126,20 @@
                 alert(data.msg);
             }
             else{
+                alert('修改成功');
+                location.reload();
+            }
+        });
+    }
+
+    //删除源
+    function delsource(id){
+        $.post("/source/del",{sid:id}, function(data){
+            if(data.status!=1){
+                alert(data.msg);
+            }
+            else{
+                alert('删除成功');
                 location.reload();
             }
         });

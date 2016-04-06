@@ -15,16 +15,20 @@ if( preg_match_all('/(.*)\/(.*)/', $querypath, $cm) == 1 ) {
 }
 else{
     $controller=$querypath;
-    $method = '';
+    $method = 'emptyMethod';
 }
 //检查controller与method格式
 if(strpos($controller,'/' )!==false || strpos($method,'/' )!==false || strpos($controller,' ' )!==false || strpos( $method,' ' )!==false){
     http_response_code(400);
     die("can't parse path: ".$querypath);
 }
+
 //controller首字自动转大写，类文件名：Xxxx.action.php ,类名：XxxxController
+Request::$queryController=$controller;
 $controller = empty($controller)? 'Index' : ucfirst($controller);
+
 //method
+Request::$queryMethod=$method;
 $method = empty($method)? 'index' : $method;
 
 //加载controller文件
@@ -37,7 +41,7 @@ else{
     die('controller file not exist: '.$actionfile);
 }
 
-//检查并执行controller->method()
+//检查controller->method()是否存在
 $instance=$controller.'Controller';
 if(! class_exists($instance)){
     http_response_code(400);
@@ -47,6 +51,8 @@ if(! is_callable(array($instance, $method))){
     http_response_code(400);
     die('controller method not exist: '.$instance.'->'.$method.'()');
 }
+
+//执行请求的方法
 session_start();
 $instance = new $instance();
 $instance->$method();

@@ -42,6 +42,14 @@ class DB {
     //替换特殊字符
     static function escape($str){
         self::connect();
-        return mysqli_real_escape_string(self::$mycon,$str);
+        if($str==null){
+            return '';
+        }
+        elseif(is_string($str)){
+            return mysqli_real_escape_string(self::$mycon,$str);
+        }
+        else{
+            return $str;
+        }
     }
 }

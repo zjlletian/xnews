@@ -24,11 +24,11 @@ class SourceController extends Controller{
         $source['url']=$_POST['url'];
         $source['alias']=$_POST['alias'];
         $source['urlrule']=$_POST['urlrule'];
-        $source['addtime']=Util::timestr(time());
-        $source['titlerule']=$_POST['t'];
-        $source['contentrule']=$_POST['c'];
-        $source['imagerule']=$_POST['i'];
-        $source['updatetime']=0;
+        $source['addtime']=Util::timestr();
+        $source['titlerule']=$_POST['titlerule'];
+        $source['contentrule']=$_POST['contentrule'];
+        $source['imagerule']=$_POST['imagerule'];
+        $source['updatetime']='0';
         $source['tag_id']=$_POST['tag'];
         if((new SourceModel())->insert($source)){
             $this->json(array('status'=>1));
@@ -46,11 +46,28 @@ class SourceController extends Controller{
 
     //修改规则
     function modify(){
-
+        $source['url']=$_POST['url'];
+        $source['alias']=$_POST['alias'];
+        $source['urlrule']=$_POST['urlrule'];
+        $source['titlerule']=$_POST['titlerule'];
+        $source['contentrule']=$_POST['contentrule'];
+        $source['imagerule']=$_POST['imagerule'];
+        $source['tag_id']=$_POST['tag'];
+        if((new SourceModel())->update($_POST['sid'],$source)){
+            $this->json(array('status'=>1));
+        }
+        else{
+            $this->json(array('status'=>0,'msg'=>'存在相同源链接，添加失败'));
+        }
     }
 
     //删除源
     function del(){
-
+        if((new SourceModel())->delete($_POST['sid'])){
+            $this->json(array('status'=>1));
+        }
+        else{
+            $this->json(array('status'=>0,'msg'=>'删除失败失败'));
+        }
     }
 }

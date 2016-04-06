@@ -3,8 +3,8 @@ require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
 class ArticleController extends Controller{
 
-    //文章首页
-    function index() {
+    //文章页面
+    function emptyMethod() {
         if(!isset($_GET['id'])){
             $this->notfind("miss id");
         }
@@ -15,5 +15,12 @@ class ArticleController extends Controller{
         }
         Request::put('articel',$articel);
         $this->view('article');
+    }
+    
+    //检查管理员登陆
+    private function checkAdmin(){
+        if(!isset($_SESSION['admin'])) {
+            $this->redirect('/auth/adminlogin');
+        }
     }
 }

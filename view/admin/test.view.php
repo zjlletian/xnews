@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Xnews 规则测试</title>
-    <?php include(APPROOT.'/public/head.php');?>
+    <?php include(APPROOT . '/view/template/head.php');?>
 </head>
 
 <body>

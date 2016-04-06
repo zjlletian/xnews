@@ -2,7 +2,12 @@
 require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
 class Controller{
-    
+
+    //空方法时调用
+    public function emptyMethod(){
+        $this->redirect('/'.Request::$queryController.'/',301);
+    }
+
     //显示视图页面
     public function view($view){
         $page=APPROOT.'/view/'.$view.'.view.php';
@@ -18,7 +23,8 @@ class Controller{
     }
 
     //重定向
-    public function redirect($url){
+    public function redirect($url,$code=302){
+        http_response_code($code);
         header('Location: '.$url);
         exit();
     }

@@ -5,16 +5,40 @@
 <!doctype html>
 <html>
 <head>
-    <title>Xnews 控制中心</title>
-    <?php include(APPROOT.'/public/head.php');?>
+    <title>Xnews 管理中心</title>
+    <?php include(APPROOT . '/view/template/head.php');?>
 </head>
 
 <body>
-    Xnews 控制中心 管理员：<?php echo $_SESSION['admin']; ?> <br><br>
-    <a href="/admin/source" target="_blank">源管理</a>
-    <a href="/admin/tags" target="_blank">分类管理</a>
-    <a href="/admin/article" target="_blank">文章管理</a>
-    <a href="/admin/users" target="_blank">用户管理</a>
-    <a href="/admin/comments" target="_blank">评论管理</a>
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/admin/">Xnews管理中心</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="fa fa-user"></span>&nbsp;&nbsp;<?php echo $_SESSION['admin']?>&nbsp;&nbsp;<span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/admin/adminpasswd"><span class="fa fa-edit"></span>&nbsp;&nbsp;&nbsp;修改密码</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li><a href="/auth/adminlogout"><span class="fa fa-power-off"></span>&nbsp;&nbsp;&nbsp;退出登录</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+
+        </div>
+        <div class="col-md-10">
+
+        </div>
+    </div>
+</div>
 </body>
 </html>

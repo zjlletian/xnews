@@ -9,6 +9,6 @@ class SourceModel extends Model{
 
     //获取源列表
     function getSourceList(){
-        return DB::query("SELECT * FROM source,tag WHERE  source.tag_id=tag.id");
+        return DB::query("SELECT source.*,tag.tagname FROM source,tag WHERE  source.tag_id=tag.id");
     }
 }

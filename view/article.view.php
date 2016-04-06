@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Xnews - <?php echo $articel['title']?></title>
-    <?php include(APPROOT.'/public/head.php');?>
+    <?php include(APPROOT . '/public/head.php');?>
 </head>
 
 <body>

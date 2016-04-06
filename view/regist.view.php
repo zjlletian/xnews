@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Xnews 用户注册</title>
-    <?php include(APPROOT.'/public/head.php');?>
+    <?php include(APPROOT . '/public/head.php');?>
 </head>
 
 <body>

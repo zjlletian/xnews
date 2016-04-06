@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Xnews</title>
-    <?php include(APPROOT.'/public/head.php');?>
+    <?php include(APPROOT . '/public/head.php');?>
 </head>
 
 <body>
