@@ -12,7 +12,7 @@ class AdminController extends Controller{
 
     //管理员首页
     function index(){
-        $this->view('admin/index');
+        $this->redirect('/source/');
     }
 
     //规则测试页面

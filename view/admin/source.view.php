@@ -10,7 +10,7 @@
 
 <body>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width:400px">
+    <div class="modal-dialog" role="document" style="width:500px">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="myModalLabel">添加源规则</h4>
@@ -44,13 +44,24 @@
     </div>
 </div>
 
-<div class="container">
-    <div id="list" class="'row">
-        <div class="col-md-12">
-            <h3 style="display:inline;">源列表</h3>
-            <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal">添加源</button>
-            <table class="table">
-                <tr><th>标识</th><th>源地址</th><th>分类</th><th>添加时间</th><th>最后采集时间</th><th>操作</th></tr>
+<?php include(APPROOT . '/view/template/adminnav.php');?>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-md-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/source/">源链管理</a></li>
+                <li><a href="/tag/">分类管理</a></li>
+                <li><a href="/article/">文章管理</a></li>
+                <li><a href="/userinfo/">用户管理</a></li>
+                <li><a href="/comments/">评论管理</a></li>
+            </ul>
+        </div>
+        <div class="col-md-10">
+            <h3 style="display:inline;">源链接列表</h3>&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal" style="margin-top:-8px">添加源</button>
+            <br><br>
+            <table class="table table-responsive table-bordered">
+                <tr><th>标识</th><th>源地址</th><th>分类</th><th>添加时间</th><th>最后采集时间</th><th>详细</th><th>删除</th></tr>
                 <?php foreach (Request::get('list') as $item):?>
                     <tr>
                         <td><?php echo $item['alias']?></td>
@@ -58,10 +69,8 @@
                         <td><?php echo $item['tagname']?></td>
                         <td><?php echo $item['addtime']?></td>
                         <td><?php echo $item['updatetime']==0?'未采集':Util::timestr($item['updatetime']);?></td>
-                        <td>
-                            <a href="javascript:showinfo(<?php echo $item['id']?>)">详情</a>
-                            <a href="javascript:delsource(<?php echo $item['id']?>)">删除</a>
-                        </td>
+                        <td><a href="javascript:showinfo(<?php echo $item['id']?>)" class="btn btn-xs btn-info">&nbsp;&nbsp;详 细&nbsp;&nbsp;</a></td>
+                        <td><a href="javascript:delsource(<?php echo $item['id']?>)" class="btn btn-xs btn-danger">&nbsp;&nbsp;删 除&nbsp;&nbsp;</a></td>
                     </tr>
                 <?php endforeach; ?>
             </table>
