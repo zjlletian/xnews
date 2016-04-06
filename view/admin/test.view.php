@@ -6,22 +6,22 @@
 <html>
 <head>
     <title>Xnews 规则测试</title>
-    <meta charset="utf-8">
+    <?php include(APPROOT.'/public/head.php');?>
 </head>
 
 <body>
     <form action="/admin/test" method="post">
-        源 地 址 ：<input type='text' name='sourceurl' value="<?php echo $_POST['sourceurl']?>" style='width:500px' id="s"/>
+        源 地 址 ：<input type='text' name='sourceurl' value="<?php echo $_POST['url']?>" style='width:500px' id="s"/>
         <br><br>
         链接规则：<input type='text' name='urlrule' value="<?php echo $_POST['urlrule']?>" style='width:500px' id="u"/>
         <br><br>
-        <input type="submit" value="分析子链接">&nbsp;<input type="button" value="新浪娱乐示例" onclick="example()">
+        <input type="submit" value="分析子链接">
         <br><hr>
-        标题规则：<input type='text'  id='t' name='t' value="<?php echo $_POST['t']?>" style='width:500px'/>
+        标题规则：<input type='text' name='titlerule' value="<?php echo $_POST['titlerule']?>" style='width:500px'  id='t'/>
         <br><br>
-        正文规则：<input type='text'  id='c' name='c' value="<?php echo $_POST['c']?>" style='width:500px'/>
+        正文规则：<input type='text' name='contentrule' value="<?php echo $_POST['contentrule']?>" style='width:500px'  id='c'/>
        <br><br>
-        图片规则：<input type='text' id='i' name='i' value="<?php echo $_POST['i']?>" style='width:500px'/>
+        图片规则：<input type='text' name='imagerule' value="<?php echo $_POST['imagerule']?>" style='width:500px' id='i' />
     </form>
     <br>
     <?php
@@ -37,24 +37,14 @@
         <input type='hidden' name="c" id='ch'>
         <input type='hidden' name="i" id='ih'>
     </form>
-
-    <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
-    <script type="text/javascript">
-        function example(){
-            $('#s').val("http://ent.sina.com.cn/");
-            $('#u').val("^http://ent.sina.com.cn/(\\w+)/(\\w+)/(\\d{4}-\\d{2}-\\d{2})/doc-(.*)$");
-            $('#t').val("#main_title");
-            $('#c').val("#artibody p");
-            $('#i').val("#artibody .img_wrapper img");
-        }
-
-        function doprevew(url){
-            $('#uh').val(url);
-            $('#th').val($('#t').val());
-            $('#ch').val($('#c').val());
-            $('#ih').val($('#i').val());
-            $('#preview').submit();
-        }
-    </script>
 </body>
+<script type="text/javascript">
+    function doprevew(url){
+        $('#uh').val(url);
+        $('#th').val($('#t').val());
+        $('#ch').val($('#c').val());
+        $('#ih').val($('#i').val());
+        $('#preview').submit();
+    }
+</script>
 </html>

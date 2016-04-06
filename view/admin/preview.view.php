@@ -7,7 +7,7 @@
 <html>
 <head>
     <title>Xnews 规则预览</title>
-    <meta charset="utf-8">
+    <?php include(APPROOT.'/public/head.php');?>
 </head>
 
 <body>

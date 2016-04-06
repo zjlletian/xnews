@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Xnews</title>
-    <meta charset="utf-8">
+    <?php include(APPROOT.'/public/head.php');?>
 </head>
 
 <body>

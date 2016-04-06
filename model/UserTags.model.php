@@ -1,9 +1,9 @@
 <?php
 require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
-class TagsModel extends Model{
+class UserTagsModel extends Model{
 
     function __construct() {
-        parent::__construct('tags');
+        parent::__construct('usertags');
     }
 }

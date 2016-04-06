@@ -15,4 +15,14 @@ class Util{
 		}  
 		return (substr($str, -$length) === $needle);
 	}
+
+	//时间格式化
+	static function timestr($time){
+		if($time!=null){
+			return date("Y-m-d H:i:s",$time);
+		}
+		else{
+			return date("Y-m-d H:i:s");
+		}
+	}
 }

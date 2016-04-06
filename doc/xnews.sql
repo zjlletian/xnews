@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : zhou-vm
-Source Server Version : 50629
-Source Host           : 192.168.1.105:3306
+Source Server         : zhoujunlong.dev
+Source Server Version : 50173
+Source Host           : zhoujunlong.dev:3306
 Source Database       : xnews
 
 Target Server Type    : MYSQL
-Target Server Version : 50629
+Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2016-04-06 02:06:50
+Date: 2016-04-06 19:28:28
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,13 +38,13 @@ INSERT INTO `admin` VALUES ('1', 'admin', 'e10adc3949ba59abbe56e057f20f883e');
 DROP TABLE IF EXISTS `article`;
 CREATE TABLE `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tag` int(255) NOT NULL,
   `url` varchar(255) NOT NULL,
   `time` int(11) NOT NULL,
   `title` varchar(255) NOT NULL,
   `content` text NOT NULL,
-  `image` varchar(255) DEFAULT NULL,
-  `status` int(255) DEFAULT NULL,
+  `image` varchar(500) DEFAULT NULL,
+  `status` int(255) NOT NULL,
+  `tag_id` int(255) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `url` (`url`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -59,10 +59,10 @@ CREATE TABLE `article` (
 DROP TABLE IF EXISTS `comments`;
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `article` int(255) NOT NULL,
-  `user` int(11) NOT NULL,
   `comment` varchar(255) NOT NULL,
   `time` int(11) NOT NULL,
+  `article_id` int(255) NOT NULL,
+  `user_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -77,14 +77,14 @@ DROP TABLE IF EXISTS `source`;
 CREATE TABLE `source` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `alias` varchar(255) NOT NULL,
-  `addtime` varchar(11) NOT NULL,
+  `addtime` datetime NOT NULL,
   `url` varchar(255) NOT NULL,
-  `tag` int(255) NOT NULL,
   `urlrule` varchar(255) NOT NULL,
   `titlerule` varchar(255) NOT NULL,
   `contentrule` varchar(255) NOT NULL,
   `imagerule` varchar(255) DEFAULT NULL,
   `updatetime` int(11) NOT NULL,
+  `tag_id` int(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
@@ -92,23 +92,23 @@ CREATE TABLE `source` (
 -- ----------------------------
 -- Records of source
 -- ----------------------------
-INSERT INTO `source` VALUES ('1', '新浪娱乐', '0', 'http://ent.sina.com.cn/', '1', '^http://ent.sina.com.cn/(\\w+)/(\\w+)/(\\d{4}-\\d{2}-\\d{2})/doc-(.*)$', '#main_title', '#artibody p', '#artibody .img_wrapper img', '0');
+INSERT INTO `source` VALUES ('1', '新浪娱乐', '2016-04-06 17:00:00', 'http://ent.sina.com.cn/', '^http://ent.sina.com.cn/(\\w+)/(\\w+)/(\\d{4}-\\d{2}-\\d{2})/doc-(.*)$', '#main_title', '#artibody p', '#artibody .img_wrapper img', '0', '1');
 
 -- ----------------------------
--- Table structure for tags
+-- Table structure for tag
 -- ----------------------------
-DROP TABLE IF EXISTS `tags`;
-CREATE TABLE `tags` (
+DROP TABLE IF EXISTS `tag`;
+CREATE TABLE `tag` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `tag` varchar(255) NOT NULL,
+  `tagname` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `tag` (`tag`)
+  UNIQUE KEY `tag` (`tagname`)
 ) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Records of tags
+-- Records of tag
 -- ----------------------------
-INSERT INTO `tags` VALUES ('1', '娱乐');
+INSERT INTO `tag` VALUES ('1', '娱乐');
 
 -- ----------------------------
 -- Table structure for userinfo
@@ -119,10 +119,25 @@ CREATE TABLE `userinfo` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `tags` varchar(255) NOT NULL,
+  `book` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of userinfo
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for usertags
+-- ----------------------------
+DROP TABLE IF EXISTS `usertags`;
+CREATE TABLE `usertags` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `tag_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of usertags
 -- ----------------------------

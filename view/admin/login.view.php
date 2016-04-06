@@ -6,11 +6,11 @@
 <html>
 <head>
     <title>Xnews 管理员登陆</title>
-    <meta charset="utf-8">
+    <?php include(APPROOT.'/public/head.php');?>
 </head>
 
 <body>
-    <form action="/admin/login" method="post">
+    <form action="/auth/adminlogin" method="post">
         <input type="text" name="name" placeholder="用户名" value="<?php echo $_POST['name']?>">
         <input type="password" name="password" placeholder="密码" value="<?php echo $_POST['password']?>">
         <input type="submit" value="登录">

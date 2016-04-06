@@ -6,7 +6,7 @@
 <html>
 <head>
     <title>Xnews 用户注册</title>
-    <meta charset="utf-8">
+    <?php include(APPROOT.'/public/head.php');?>
 </head>
 
 <body>
