@@ -18,7 +18,7 @@
         echo $article['content'];
         $imgs=explode("\n",$article["images"]);
         foreach ($imgs as $img){
-            echo "<img src='{$img}'/> <br>";
+            echo "<img src='{$img}'/> <br><br>";
         }
     ?>
 </body>

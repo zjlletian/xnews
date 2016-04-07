@@ -9,13 +9,13 @@ class UrlAnalyzer{
 		//设置curl
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-	    curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
+		curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
 		curl_setopt($ch, CURLOPT_URL, $url);
-	 	curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 5000);//设置连接超时时间
-	 	curl_setopt($ch, CURLOPT_TIMEOUT_MS, 5000);//设置超时时间
-	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//1将结果返回，0直接stdout
-	    curl_setopt($ch, CURLOPT_ENCODING, "gzip");//支持gzip
-	    //处理request header
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT_MS, 5000);//设置连接超时时间
+		curl_setopt($ch, CURLOPT_TIMEOUT_MS, 5000);//设置超时时间
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//1将结果返回，0直接stdout
+		curl_setopt($ch, CURLOPT_ENCODING, "gzip");//支持gzip
+		//处理request header
 		$header = array();
 		$header[] = "Accept: text/html;q=0.8";
 		$header[] = "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64)";
@@ -123,8 +123,8 @@ class UrlAnalyzer{
 		//提取正文
 		$content=$htmldom[$contentRule]->htmlOuter();
 
-		//去除多余的html标签，保留<p>与<strong>标签
-		$content=strip_tags($content, "<p><strong>");
+		//去除多余的html标签，保留<p>与<strong><img>标签
+		$content=strip_tags($content, "<p><strong><img>");
 
 		//合并多个空格与空段落
 		$content=strtr($content, array("\t"=>"", "\n"=>""));
@@ -133,8 +133,13 @@ class UrlAnalyzer{
 
 		//提取图片
 		$imgs=array();
+		$baseurl=self::urlSplit($url);
 		foreach ($htmldom[$imgRules] as $img){
-			$imgs[]=$img->getAttribute('src');
+			$href=$img->getAttribute('src');
+			$link=self::transformHref($href, $baseurl);
+			if($link!=false && !in_array($link,$imgs[])){
+				$imgs[]=$link;
+			}
 		}
 		$urlinfo['images'] = implode("\r\n",$imgs);
 
