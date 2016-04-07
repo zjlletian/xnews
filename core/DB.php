@@ -45,11 +45,11 @@ class DB {
         if($str==null){
             return '';
         }
-        elseif(is_string($str)){
-            return mysqli_real_escape_string(self::$mycon,$str);
+        elseif(is_numeric($str)){
+            return $str;
         }
         else{
-            return $str;
+            return mysqli_real_escape_string(self::$mycon,$str);
         }
     }
 }

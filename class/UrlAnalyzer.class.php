@@ -254,6 +254,11 @@ class UrlAnalyzer{
 		if(empty($href)){
 			return false;
 		}
+		foreach ($GLOBALS['BANWORD'] as $ban){
+			if(strstr($href,$ban)){
+				return false;
+			}
+		}
 
 		//以协议开头的直接使用，以'//'开头的继承父链接协议，以'/'开头的使用绝对路径，其他情况使用相对路径
 		if(Util::strStartWith($href,'http://') || Util::strStartWith($href,'https://')) {

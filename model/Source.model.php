@@ -11,4 +11,9 @@ class SourceModel extends Model{
     function getSourceList(){
         return DB::query("SELECT source.*,tag.tagname FROM source,tag WHERE  source.tag_id=tag.id");
     }
+
+    //获取需要爬取url的源任务
+    function getTask(){
+        return $this->getlist('where updatetime<'.time());
+    }
 }

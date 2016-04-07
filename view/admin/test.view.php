@@ -11,7 +11,7 @@
 
 <body>
     <form action="/admin/test" method="post">
-        源 地 址 ：<input type='text' name='sourceurl' value="<?php echo $_POST['url']?>" style='width:500px' id="s"/>
+        源 地 址 ：<input type='text' name='url' value="<?php echo $_POST['url']?>" style='width:500px' id="s"/>
         <br><br>
         链接规则：<input type='text' name='urlrule' value="<?php echo $_POST['urlrule']?>" style='width:500px' id="u"/>
         <br><br>
