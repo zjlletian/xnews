@@ -65,7 +65,7 @@ class UrlAnalyzer{
 				}
 			}
 			//过滤js与css
-			$reg=array("'<script[^>]*?>.*?</script>'si", "'<style[^>]*?>.*?</style>'si");
+			$reg=array("'<script[^>]*?>.*?</script>'si", "'<style[^>]*?>.*?</style>'si" , '@style=\".*\"@','@style=\\\'.*\\\'@');
 			$htmltext = preg_replace($reg,'', $htmltext);
 		}
 		catch(Exception $e) {
@@ -118,7 +118,13 @@ class UrlAnalyzer{
 		$htmldom= phpQuery::newDocument($htmltext);
 
 		//获取标题
-		$urlinfo['title']=$htmldom[$titleRule]->text();
+		$title=$htmldom[$titleRule];
+		if($title!=null){
+			$urlinfo['title']=trim($title->text());
+		}
+		else{
+			$urlinfo['title']=null;
+		}
 
 		//提取正文
 		$content=$htmldom[$contentRule]->htmlOuter();
@@ -127,9 +133,10 @@ class UrlAnalyzer{
 		$content=strip_tags($content, "<p><strong><img>");
 
 		//合并多个空格与空段落
-		$content=strtr($content, array("\t"=>"", "\n"=>""));
+		$content=strtr($content, array("\t"=>"", "\n"=>""," "=>""));
+		$content=preg_replace("/<p><\/p>/","",$content);
 		$content=preg_replace("/[\s]+/","",$content);
-		$urlinfo['content']=str_replace("</p>","</p>\n",$content);
+		$urlinfo['content']=$content;
 
 		//提取图片
 		$imgs=array();

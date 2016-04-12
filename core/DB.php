@@ -26,6 +26,7 @@ class DB {
 
     //请求数据库，返回结果 bool 或 array
     static function query($sql) {
+        //echo $sql;
         self::connect();
         $result=mysqli_query(self::$mycon, $sql);
         if(is_bool($result)){
@@ -42,10 +43,7 @@ class DB {
     //替换特殊字符
     static function escape($str){
         self::connect();
-        if($str==null){
-            return '';
-        }
-        elseif(is_numeric($str)){
+        if(is_numeric($str)){
             return $str;
         }
         else{

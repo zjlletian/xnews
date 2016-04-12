@@ -14,6 +14,6 @@ class SourceModel extends Model{
 
     //获取需要爬取url的源任务
     function getTask(){
-        return $this->getlist('where updatetime<'.time());
+        return $this->getlist('where updatetime<'.(time()-1800));
     }
 }

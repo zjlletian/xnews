@@ -16,7 +16,7 @@ abstract class Model{
         $vs=array();
         foreach ($data as $k=>$v){
             $ks[]="`{$k}`";
-            $vs[]="'".DB::escape($v)."'";
+            $vs[]= $v===null? 'NULL' : "'".DB::escape($v)."'";
         }
         $ks=implode(",",$ks);
         $vs=implode(",",$vs);
@@ -38,7 +38,7 @@ abstract class Model{
     function update($id,$data){
         $kvs=array();
         foreach ($data as $k=>$v){
-            $kvs[]="`{$k}` = '".DB::escape($v)."'";
+            $kvs[]="`{$k}` = ".($v===null? 'NULL' : "'".DB::escape($v)."'");
         }
         $kvs=implode(",",$kvs);
         return DB::query("UPDATE {$this->tname} SET {$kvs} WHERE id={$id}");
