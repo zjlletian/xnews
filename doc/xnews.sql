@@ -43,8 +43,8 @@ CREATE TABLE `article` (
   `time` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `content` text,
-  `image` varchar(500) DEFAULT NULL,
-  `tag_id` int(255) NOT NULL,
+  `images` varchar(500) DEFAULT NULL,
+  `source_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
@@ -84,7 +84,7 @@ CREATE TABLE `source` (
   `contentrule` varchar(255) NOT NULL,
   `imagerule` varchar(255) DEFAULT NULL,
   `updatetime` int(11) NOT NULL,
-  `tag_id` int(255) NOT NULL,
+  `tag_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`)
 ) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

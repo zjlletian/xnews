@@ -67,7 +67,7 @@ class SourceController extends Controller{
             $this->json(array('status'=>1));
         }
         else{
-            $this->json(array('status'=>0,'msg'=>'删除失败失败'));
+            $this->json(array('status'=>0,'msg'=>'删除失败'));
         }
     }
 }

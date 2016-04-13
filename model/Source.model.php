@@ -16,4 +16,9 @@ class SourceModel extends Model{
     function getTask(){
         return $this->getlist('where updatetime<'.(time()-1800));
     }
+
+    //根据分类获取source列表
+    function getSourceByTag($tagid){
+        return $this->getlist('where tag_id='.$tagid);
+    }
 }

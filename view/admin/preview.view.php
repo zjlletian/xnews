@@ -12,13 +12,19 @@
 
 <body>
     <h1><?php echo $article['title']?></h1>
-    <a href="<?php echo $_POST['u']?>" target="_blank">原链接： <?php echo $_POST['u']?></a>
+    <a href="<?php echo $article['url']?>" target="_blank">原链接： <?php echo $article['url']?></a>
     <br>
     <?php
         echo $article['content'];
-        $imgs=explode("\n",$article["images"]);
+        $imgs=explode("$$",$article["images"]);
         foreach ($imgs as $img){
-            echo "<img src='{$img}'/> <br><br>";
+            if(!strstr($img,'@@')){
+                echo "<img src='{$img}'/><br><br>";
+            }
+            else{
+                $img=explode('@@',$img);
+                echo "<img src='{$img[0]}'/><br>$img[1]<br><br>";
+            }
         }
     ?>
 </body>

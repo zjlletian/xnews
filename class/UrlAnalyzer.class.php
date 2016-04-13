@@ -144,11 +144,15 @@ class UrlAnalyzer{
 		foreach ($htmldom[$imgRules] as $img){
 			$href=$img->getAttribute('src');
 			$link=self::transformHref($href, $baseurl);
+			$alt=$img->getAttribute('alt');
+			if(!empty($alt)){
+				$link.="@@".$alt;
+			}
 			if($link!=false && !in_array($link,$imgs)){
 				$imgs[]=$link;
 			}
 		}
-		$urlinfo['images'] = implode("\r\n",$imgs);
+		$urlinfo['images'] = implode("$$",$imgs);
 
 		//清理phpquery
 		phpQuery::$documents = array();

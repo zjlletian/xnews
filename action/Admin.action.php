@@ -17,9 +17,6 @@ class AdminController extends Controller{
 
     //规则测试页面
     function test() {
-        if(isset($_GET['sid'])){
-
-        }
         if(isset($_POST['url']) && isset($_POST['urlrule'])){
             $urllist=UrlAnalyzer::getUrls($_POST['url'],"@".$_POST['urlrule']."@");
             Request::put('urllist',$urllist);
@@ -29,7 +26,9 @@ class AdminController extends Controller{
 
     //规则测试预览
     function preview(){
-        Request::put('article',UrlAnalyzer::getInfo($_POST['u'], $_POST['t'], $_POST['c'], $_POST['i']));
+        $article=UrlAnalyzer::getInfo($_POST['u'], $_POST['t'], $_POST['c'], $_POST['i']);
+        $article['url']=$_POST['u'];
+        Request::put('article',$article);
         $this->view('admin/preview');
     }
 }
