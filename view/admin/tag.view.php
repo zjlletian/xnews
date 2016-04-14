@@ -97,7 +97,7 @@
 
     //添加源
     function additem(){
-        $.post("/tag/add", $('#ruleform').serialize(), function(data){
+        $.post("/tag/add", $('#mainform').serialize(), function(data){
             if(data.status!=1){
                 alert(data.msg);
             }
