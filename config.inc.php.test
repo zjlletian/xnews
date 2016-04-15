@@ -8,7 +8,14 @@ $GLOBALS['MYSQL'] = array(
     'host'=>'localhost',
     'port'=>'3306',
     'db'=>'xnews',
-    'user'=>'root',
+    'user'=>'user',
     'passwd'=>'passwd',
     'charset'=>'utf8'
+);
+
+$GLOBALS['BANWORD']=array(
+    'mailto',
+    'javascript',
+    'void(0)',
+    'about:'
 );
