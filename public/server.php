@@ -3,7 +3,7 @@ require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
 //获取访问路径
 if(!isset($_GET['_querypath'])) {
-    (new Controller())->redirect("/");
+    (new Controller())->redirect("/",301);
 }
 $querypath = $_GET['_querypath'];
 unset($_GET['_querypath']);
@@ -15,7 +15,7 @@ if( preg_match_all('/(.*)\/(.*)/', $querypath, $cm) == 1 ) {
 }
 else{
     $controller=$querypath;
-    $method = 'emptyMethod';
+    $method = 'emptymethod';
 }
 //检查controller与method格式
 if(strpos($controller,'/' )!==false || strpos($method,'/' )!==false || strpos($controller,' ' )!==false || strpos( $method,' ' )!==false){

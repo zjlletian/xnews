@@ -9,54 +9,14 @@
 </head>
 
 <body>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width:400px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加分类</h4>
-            </div>
-            <div class="modal-body">
-                <form id="mainform" method="post" target="_blank" action="/admin/test">
-                        <input type='hidden' name='sid' id="sid"/>
-                        <label class="formlabel">分类名称</label>
-                        <input type='text' id='tagname' name='tagname' class="form-control input-sm" placeholder="分类名称，如新浪娱乐"/>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-success" onclick="additem()" id="btn_add">添加</button>
-                <button class="btn btn-sm btn-success" onclick="moditem()" id="btn_mod" style="display:none">修改</button>&nbsp;&nbsp;
-                <button class="btn btn-sm btn-warning" data-dismiss="modal" aria-label="Close">取消</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="infoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document" style="width:400px">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="tagtitle">源列表</h4>
-            </div>
-            <div class="modal-body">
-                <div id="sourcelist"></div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-sm btn-info" data-dismiss="modal" aria-label="Close">确定</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <?php include(APPROOT . '/view/template/adminnav.php');?>
 <div class="container-fluid">
     <div class="row-fluid">
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/source/">源链管理</a></li>
-                <li class="active"><a href="/tag/">分类管理</a></li>
-                <li><a href="/article/">文章管理</a></li>
+                <li><a href="/tag/">分类管理</a></li>
+                <li  class="active"><a href="/article/">文章管理</a></li>
                 <li><a href="/userinfo/">用户管理</a></li>
                 <li><a href="/comments/">评论管理</a></li>
             </ul>

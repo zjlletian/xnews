@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <form action="/auth/adminlogin" method="post">
+    <form action="/admin/login" method="post">
         <input type="text" name="name" placeholder="用户名" value="<?php echo $_POST['name']?>">
         <input type="password" name="password" placeholder="密码" value="<?php echo $_POST['password']?>">
         <input type="submit" value="登录">

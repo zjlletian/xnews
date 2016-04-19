@@ -4,8 +4,10 @@ require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 class Controller{
 
     //空方法时调用
-    public function emptyMethod(){
-        $this->redirect('/'.Request::$queryController.'/',301);
+    public function emptymethod(){
+        if(!empty(Request::$queryController)){
+            $this->redirect('/'.Request::$queryController.'/',301);
+        }
     }
 
     //显示视图页面

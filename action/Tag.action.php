@@ -6,7 +6,7 @@ class TagController extends Controller{
     //检查管理员是否登陆
     function __construct(){
         if(!isset($_SESSION['admin'])) {
-            $this->redirect('/auth/adminlogin');
+            $this->redirect('/admin/login');
         }
     }
 

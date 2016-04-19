@@ -4,7 +4,7 @@
 <!doctype html>
 
 <head>
-    <title>Xnews源管理</title>
+    <title>Xnews 管理中心</title>
     <?php include(APPROOT . '/view/template/head.php');?>
 </head>
 
