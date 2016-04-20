@@ -92,7 +92,7 @@ CREATE TABLE `source` (
 -- ----------------------------
 -- Records of source
 -- ----------------------------
-INSERT INTO `source` VALUES ('5', '新浪娱乐', '2016-04-06 17:00:00', 'http://ent.sina.com.cn/', '^http://ent.sina.com.cn/(\\w+)/(\\w+)/(\\d{4}-\\d{2}-\\d{2})/doc-(.*)$', '#main_title', '#artibody p', '#artibody .img_wrapper img', '0', '1');
+INSERT INTO `source` VALUES ('1', '新浪娱乐', '2016-04-06 17:00:00', 'http://ent.sina.com.cn/', '^http://ent.sina.com.cn/(\\w+)/(\\w+)/(\\d{4}-\\d{2}-\\d{2})/doc-(.*)$', '#main_title', '#artibody p', '#artibody .img_wrapper img', '0', '5');
 
 -- ----------------------------
 -- Table structure for tag
