@@ -6,7 +6,7 @@ $article=Request::get('article');
 <!doctype html>
 <html>
 <head>
-    <title>Xnews - <?php echo $article['title']?></title>
+    <title><?php echo $article['title']?> - Xnews</title>
     <?php include(APPROOT . '/view/template/head.php');?>
 </head>
 

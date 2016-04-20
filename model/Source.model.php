@@ -14,7 +14,7 @@ class SourceModel extends Model{
 
     //获取需要爬取url的源任务
     function getTask(){
-        return $this->getlist('where updatetime<'.(time()-1800));
+        return $this->getlist('where updatetime<'.(time()-300));
     }
 
     //根据分类获取source列表

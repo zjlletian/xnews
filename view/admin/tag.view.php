@@ -95,7 +95,7 @@
         })
     });
 
-    //添加源
+    //添加
     function additem(){
         $.post("/tag/add", $('#mainform').serialize(), function(data){
             if(data.status!=1){
@@ -135,7 +135,7 @@
         });
     }
 
-    //修改源
+    //修改
     function moditem(){
         $.post("/tag/modify", $('#mainform').serialize(), function(data){
             if(data.status!=1){
@@ -148,7 +148,7 @@
         });
     }
 
-    //删除源
+    //删除
     function delitem(id){
         $.post("/tag/del",{sid:id}, function(data){
             if(data.status!=1){

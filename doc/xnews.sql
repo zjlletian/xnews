@@ -43,7 +43,7 @@ CREATE TABLE `article` (
   `time` int(11) NOT NULL,
   `title` varchar(255) DEFAULT NULL,
   `content` text,
-  `images` varchar(500) DEFAULT NULL,
+  `images` text DEFAULT NULL,
   `source_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`)

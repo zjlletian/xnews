@@ -8,7 +8,7 @@ while(true){
     //获取新的链接
     $sourcelist=$sourceModel->getTask();
     foreach ($sourcelist as $source){
-        echo '分析源:'.$source['url']."\n";
+        echo Util::timestr(time()).' 分析源:'.$source['url']."\n";
         $urls=UrlAnalyzer::getUrls($source['url'],'@'.$source['urlrule'].'@');
         foreach ($urls as $url){
             $exist=$articleModel->getlist('where url=\''.DB::escape($url).'\'');
@@ -40,14 +40,14 @@ while(true){
             }
             else{
                 echo '子链接：'.$url." 获取信息失败\n";
-                $article['status']=0;
+                $article['status']=4;
             }
             if(!$articleModel->insert($article)){
                 echo "写入数据库失败\n";
             }
         }
-        echo "分析完成\n\n";
+        echo Util::timestr(time())." 分析完成\n\n";
         $sourceModel->update($source['id'],array('updatetime'=>time()));
     }
-    sleep(300);
+    sleep(60);
 }
