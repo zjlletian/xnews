@@ -29,25 +29,35 @@ class ArticleController extends Controller{
         if(!isset($_GET['p'])){
             $this->redirect('/article/?p=1');
         }
+        $sourceid=null;
+        if(!isset($_GET['s'])){
+            Request::put('pageurl','/article/?p=');
+        }
+        else{
+            $sourceid=$_GET['s'];
+            Request::put('pageurl','/article/?s='.$sourceid.'&p=');
+        }
+
         $model=new ArticleModel();
-        $totalcount=$model->getAticleCount();
+        $totalcount=$model->getAticleCount($sourceid);
         $pagesize=10;
         $pages=intval($totalcount/$pagesize);
         $pages=$totalcount%$pagesize>0?$pages+1:$pages;
         $p=intval($_GET['p']);
         $p=$p>$pages?$pages:$p;
         $p=$p<1?1:$p;
-        $list=$model->getAticleList($pagesize,$p);
+        $list=$model->getAticleList($pagesize,$p,$sourceid);
         Request::put('total',$totalcount);
         Request::put('page',$p);
         Request::put('pages',$pages);
         Request::put('list',$list);
+        Request::put('source',(new SourceModel())->getlist());
         $this->view('admin/article');
     }
 
     //删除
     function del(){
-        if((new ArticleModel())->update($_POST['sid'],array('status'=>0))){
+        if((new ArticleModel())->update($_POST['sid'],array('status'=>-1))){
             $this->json(array('status'=>1));
         }
         else{

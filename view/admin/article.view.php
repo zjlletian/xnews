@@ -22,11 +22,18 @@
             </ul>
         </div>
         <div class="col-md-7">
-            <h3 style="display:inline;">文章列表</h3>&nbsp;&nbsp;&nbsp;
-            <button type="button" class="btn btn-sm btn-success" style="margin-top:-8px">筛选</button>
-            <br><br>
-            共<span style="color:#5bc0de"><?php echo Request::get('total')?></span> 条记录，
-            <span style="color:#5bc0de"><?php echo Request::get('pages')?></span> 页，
+            <form class="form-inline">
+                <h3 style="display:inline;">文章列表</h3>&nbsp;&nbsp;&nbsp;
+                <select class="form-control input-sm"  id="source" style="margin-top:-8px">
+                    <option value="0" <?php if(!isset($_GET['s'])){ echo 'selected'; }?>> 所有来源 </option>
+                    <?php foreach (Request::get('source') as $item): ?>
+                        <option value='<?php echo $item['id'];?>' <?php if(isset($_GET['s']) && $_GET['s']==$item['id']){ echo 'selected'; }?>><?php echo $item['alias'];?></option>;
+                    <?php endforeach;?>
+                </select>
+                <button type="button" class="btn btn-sm btn-success" style="margin-top:-8px" onclick="changesource()">筛选</button>
+            </form>
+            <br>
+            共 <span style="color:#5bc0de"><?php echo Request::get('total')?></span> 条记录，<span style="color:#5bc0de"><?php echo Request::get('pages')?></span> 页，
             当前第 <span style="color:#5bc0de"><?php echo Request::get('page')?></span> 页
             <br><br>
             <table class="table table-responsive table-bordered">
@@ -50,6 +57,18 @@
 </body>
 
 <script type="text/javascript">
+
+    //选择来源
+    function changesource(){
+        $sourceid=$('#source').val();
+        if($sourceid=='0'){
+            window.location.href='/article/?p=1';
+        }
+        else{
+            window.location.href='/article/?s='+$sourceid+'&p=1';
+        }
+    }
+
     //删除
     function delitem(id){
         $.post("/article/del",{sid:id}, function(data){

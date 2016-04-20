@@ -23,6 +23,9 @@ while(true){
             );
             $articleinfo=UrlAnalyzer::getInfo($url,$source['titlerule'],$source['contentrule'],$source['imagerule']);
             if($articleinfo!=null){
+                $article['title']=$articleinfo['title'];
+                $article['content']=$articleinfo['content'];
+                $article['images']=$articleinfo['images'];
                 if(empty($articleinfo['title'])){
                     echo '子链接：'.$url." 未分析出标题\n";
                     $article['status']=2;
@@ -31,16 +34,17 @@ while(true){
                     echo '子链接：'.$url." 未分析出正文\n";
                     $article['status']=3;
                 }
+                elseif(strlen($articleinfo['content'])<200){
+                    echo '子链接：'.$url." 正文内容过短\n";
+                    $article['status']=4;
+                }
                 else{
-                    $article['title']=$articleinfo['title'];
-                    $article['content']=$articleinfo['content'];
-                    $article['images']=$articleinfo['images'];
                     echo '子链接：'.$url." 标题：".$article['title']."\n";
                 }
             }
             else{
                 echo '子链接：'.$url." 获取信息失败\n";
-                $article['status']=4;
+                $article['status']=0;
             }
             if(!$articleModel->insert($article)){
                 echo "写入数据库失败\n";

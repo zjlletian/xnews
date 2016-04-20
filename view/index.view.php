@@ -2,14 +2,13 @@
     require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 ?>
 
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
     <title>Xnews</title>
-    <?php include(APPROOT . '/public/head.php');?>
+    <meta charset="utf-8">
 </head>
-
 <body>
-    xnews
+xnews index
 </body>
 </html>
