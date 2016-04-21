@@ -21,7 +21,12 @@ class ArticleController extends Controller{
             $this->notfind();
         }
         Request::put('article',$article);
-        $this->view('article');
+        if(isset($_GET['pre'])){
+            $this->view('admin/preview');
+        }
+        else{
+            $this->view('article');
+        }
     }
 
     //列表
@@ -39,14 +44,14 @@ class ArticleController extends Controller{
         }
 
         $model=new ArticleModel();
-        $totalcount=$model->getAticleCount($sourceid);
+        $totalcount=$model->getArticleCount($sourceid);
         $pagesize=10;
         $pages=intval($totalcount/$pagesize);
         $pages=$totalcount%$pagesize>0?$pages+1:$pages;
         $p=intval($_GET['p']);
         $p=$p>$pages?$pages:$p;
         $p=$p<1?1:$p;
-        $list=$model->getAticleList($pagesize,$p,$sourceid);
+        $list=$model->getArticleList($pagesize,$p,$sourceid);
         Request::put('total',$totalcount);
         Request::put('page',$p);
         Request::put('pages',$pages);
