@@ -133,7 +133,7 @@ class UrlAnalyzer{
 		$content=strip_tags($content, "<p><strong><img>");
 
 		//合并多个空格与空段落
-		$content=strtr($content, array("\t"=>"", "\n"=>""," "=>""));
+		$content=strtr($content, array("\t"=>"", "\n"=>""," "=>"","[微博]"=>""));
 		$content=preg_replace("/<p><\/p>/","",$content);
 		$content=preg_replace("/[\s]+/","",$content);
 		$urlinfo['content']=$content;

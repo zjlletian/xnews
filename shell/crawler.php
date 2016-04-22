@@ -19,7 +19,8 @@ while(true){
                 'url'=>$url,
                 'time'=>time(),
                 'status'=>1,
-                'source_id'=>$source['id']
+                'source_id'=>$source['id'],
+                'view'=>0
             );
             $articleinfo=UrlAnalyzer::getInfo($url,$source['titlerule'],$source['contentrule'],$source['imagerule']);
             if($articleinfo!=null){

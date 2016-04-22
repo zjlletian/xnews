@@ -21,7 +21,10 @@
         </header>
         <div class="content">
             <div class="content-block" id="newslist">
-                <a href="/article?id=1" data-no-cache="true">demo</a>
+                <?php foreach (Request::get('list') as $item):?>
+                    <a href="/article?id=<?php echo $item['id']?>" data-no-cache="true"><?php echo $item['title']?></a>
+                    <br>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>
@@ -75,7 +78,9 @@
         }
     }
 
-    //初始化sui组件
-    $(function(){$.init()});
+    //初始化
+    $(function(){
+        $.init();
+    });
 </script>
 </html>

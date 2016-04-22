@@ -8,20 +8,33 @@ class ArticleModel extends Model{
     }
 
     //获取对应列表数量
-    function getArticleCount($sourceid){
+    function getArticleCount($sourceid=null){
         $s=$sourceid==null?'':' AND article.source_id='.$sourceid;
         return count(DB::query("SELECT article.*, source.alias, tag.tagname FROM article, source, tag WHERE  source.tag_id=tag.id AND article.source_id=source.id AND article.status=1 {$s}"));
     }
 
     //获取列表
-    function getArticleList($size,$page,$sourceid){
+    function getArticleList($size,$page,$sourceid=null){
         $from=($page-1)*$size;
         $s=$sourceid==null?'':' AND article.source_id='.$sourceid;
         return DB::query("SELECT article.*, source.alias, tag.tagname FROM article, source, tag WHERE  source.tag_id=tag.id AND article.source_id=source.id AND article.status=1 {$s} ORDER BY article.time DESC limit {$from},{$size}");
     }
 
-    //
-    function getArticelByTag($tag,$from){
+    //获取最新的文章列表
+    function getArticelByTag($from=null,$tagid=null){
+        $s=$from==null?'':" AND article.id<{$from} ";
+        $s.=$tagid==null?'':' AND source.tag_id='.$tagid;
+        return DB::query("SELECT article.*, source.alias, tag.tagname FROM article, source, tag WHERE  source.tag_id=tag.id AND article.source_id=source.id AND article.status=1 {$s} ORDER BY article.time DESC limit 50");
+    }
 
+    //获取文章详情
+    function getArticle($id){
+        $array=DB::query("SELECT article.*, source.alias, tag.tagname FROM article, source, tag WHERE  source.tag_id=tag.id AND article.source_id=source.id AND article.status=1 AND article.id={$id}");
+        return count($array)==1?$array[0]:null;
+    }
+
+    //增加访问量
+    function increaseView($id){
+        return DB::query("UPDATE article SET article.view=article.view+1 WHERE article.id={$id}");
     }
 }

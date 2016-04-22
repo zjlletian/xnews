@@ -11,6 +11,9 @@ class IndexController extends Controller{
 
     //首页
     function index() {
+        $model=new ArticleModel();
+        $list=$model->getArticelByTag();
+        Request::put('list',$list);
         $this->view('index');
     }
 }

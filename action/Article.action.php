@@ -16,10 +16,10 @@ class ArticleController extends Controller{
             $this->notfind("miss id");
         }
         $articelmodel=new ArticleModel();
-
-        if(null == $article=$articelmodel->find($_GET['id'])){
+        if(null == $article=$articelmodel->getArticle($_GET['id'])){
             $this->notfind();
         }
+        $articelmodel->increaseView($article['id']);
         Request::put('article',$article);
         if(isset($_GET['pre'])){
             $this->view('admin/preview');
