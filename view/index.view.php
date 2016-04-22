@@ -22,9 +22,49 @@
         <div class="content">
             <div class="content-block" id="newslist">
                 <?php foreach (Request::get('list') as $item):?>
-                    <a href="/article?id=<?php echo $item['id']?>" data-no-cache="true"><?php echo $item['title']?></a>
-                    <br>
+                    <a href="/article?id=<?php echo $item['id']?>" data-no-cache="true">
+                        <?php $images=explode('$$',$item['images']) ?>
+
+                        <!-- 无图标题 -->
+                        <?php if(empty($images[0])):?>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-content-inner"><?php echo $item['title']?></div>
+                                </div>
+                            </div>
+                        <?php endif;?>
+
+                        <!-- 单图片标题 -->
+                        <?php if(!empty($images[0]) && count($images)<3):?>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-content-inner" style="height: 90px">
+                                        <div style="float:left; width: 75%; height: 100%">
+                                            <?php echo $item['title']?>
+                                        </div>
+                                        <div style="float:left; width:25%; text-align:right; height: 100%">
+                                            <img src="<?php echo strstr($images[0],'@@')?explode('@@',$images[0])[0]:$images[0]; ?>" style="width: 100%; height: 75px; margin-top: -10px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif;?>
+
+                        <!-- 三图片标题 -->
+                        <?php if(!empty($images[0]) && count($images)>=3):?>
+                            <div class="card">
+                                <div class="card-content">
+                                    <div class="card-content-inner">
+                                        <?php echo $item['title']?><br>
+                                        <img src="<?php echo strstr($images[0],'@@')?explode('@@',$images[0])[0]:$images[0]; ?>" style="width: 32%; height: 90px; margin-top: 3px;">
+                                        <img src="<?php echo strstr($images[1],'@@')?explode('@@',$images[2])[0]:$images[1]; ?>" style="width: 32%; height: 90px; margin-top: 3px;">
+                                        <img src="<?php echo strstr($images[1],'@@')?explode('@@',$images[2])[0]:$images[1]; ?>" style="width: 32%; height: 90px; margin-top: 3px;">
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endif;?>
                 <?php endforeach; ?>
+                </a>
             </div>
         </div>
     </div>
