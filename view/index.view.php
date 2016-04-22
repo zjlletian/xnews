@@ -13,15 +13,15 @@
 <!-- 所有Page -->
 <div class="page-group">
     <!-- 首页page -->
-    <div class="page page-current">
+    <div class="page page-current" id="page-index">
         <header class="bar bar-nav">
-            <a class="icon icon-me open-panel pull-left" data-panel='#uesrpanel'></a>
+            <a class="icon icon-me pull-left open-panel" data-panel='#uesrpanel'></a>
             <h1 class="title" id="maintitle">Xnews - 头条</h1>
-            <a class="icon icon-me open-panel pull-right" data-panel='#tagpanel'></a>
+            <a class="icon icon-menu pull-right open-panel" data-panel='#tagpanel'></a>
         </header>
         <div class="content">
             <div class="content-block" id="newslist">
-                <a href="/article?id=1">demo</a>
+                <a href="/article?id=1" data-no-cache="true">demo</a>
             </div>
         </div>
     </div>
@@ -44,8 +44,38 @@
         <p><a class="close-panel">关闭</a></p>
     </div>
 </div>
+
 </body>
+<?php include(APPROOT . '/view/template/mscripts.php');?>
 <script>
-    $.init();
+    //ajax加载其他页面
+    $(window).on("pageLoadStart",function() {
+        $.showIndicator();
+    });
+
+    //加载文章页面完成
+    $(window).on("pageLoadComplete",function() {
+        if($('#pagename').val()=='article'){
+
+        }
+    });
+
+    //添加收藏
+    function addfavourite(){
+        var star=$('#likestar');
+        if(star.attr('data-liked')=='false'){
+            $.toast('添加收藏成功');
+            star.removeClass('fa-star-o').addClass('fa-star');
+            star.attr('data-liked','true');
+        }
+        else{
+            $.toast('取消收藏成功');
+            star.removeClass('fa-star').addClass('fa-star-o');
+            star.attr('data-liked','false');
+        }
+    }
+
+    //初始化sui组件
+    $(function(){$.init()});
 </script>
 </html>

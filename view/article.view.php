@@ -2,19 +2,16 @@
 require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 $article=Request::get('article');
 ?>
-
-<!doctype html>
-<html>
-<head>
-    <title><?php echo $article['title']?> - Xnews</title>
-    <?php include(APPROOT . '/view/template/mhead.php');?>
-</head>
-
-<body>
 <div class="page-group">
     <div class="page" id='articlepage'>
+        <input type="hidden" id="pagename" value="article">
+        <header class="bar bar-nav">
+            <a class="icon icon-left pull-left back"></span></a>
+            <h1 class="title" id="maintitle">Xnews - 文章详情</h1>
+            <a class="button button-link pull-right" onclick="addfavourite()" ><span class="fa fa-lg fa-star-o" id="likestar" data-liked="false"></span></a>
+        </header>
         <div class="content">
-            <h1 class='title'><?php echo $article['title']?></h1>
+            <h3><?php echo $article['title']?></h3>
             <div class="content-block">
                 <a href="<?php echo $article['url']?>" target="_blank" class="external">原链接： <?php echo $article['url']?></a>
                 <br>
@@ -34,7 +31,4 @@ $article=Request::get('article');
             </div>
         </div>
     </div>
-
 </div>
-</body>
-</html>
