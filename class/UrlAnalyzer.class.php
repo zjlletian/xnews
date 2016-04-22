@@ -136,6 +136,7 @@ class UrlAnalyzer{
 		$content=strtr($content, array("\t"=>"", "\n"=>""," "=>"","[微博]"=>""));
 		$content=preg_replace("/<p><\/p>/","",$content);
 		$content=preg_replace("/[\s]+/","",$content);
+		$content=preg_replace("/<p>　&gt;&gt;&gt;&gt;点击试听《(.*)》<\/p>/","",$content);
 		$urlinfo['content']=$content;
 
 		//提取图片

@@ -8,3 +8,4 @@
 <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
 <link rel="stylesheet" href="//g.alicdn.com/msui/sm/0.6.2/css/sm-extend.min.css">
 <link rel="stylesheet" href="/css/font-awesome-4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/mstyle.css">

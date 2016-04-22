@@ -1,0 +1,30 @@
+.newstitle{
+    padding-bottom: 3%;
+}
+
+.titleinfo{
+    height: 0.6rem;
+    font-size: 0.5rem;
+    color: #AAAAAA;
+}
+
+.article-header{
+    margin-top: -20px;
+}
+
+.article-title{
+    color: black;
+    font-size: 0.85rem;
+}
+
+.article-info{
+    height: 0.7rem;
+    font-size: 0.6rem;
+    color:#777777;
+    margin-top: -15px;
+}
+
+.article-content{
+    color: black;
+    font-size: 0.75rem;
+}
