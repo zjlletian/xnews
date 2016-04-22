@@ -20,7 +20,7 @@
             <a class="icon icon-menu pull-right open-panel" data-panel='#tagpanel'></a>
         </header>
         <div class="content">
-            <div style="margin-bottom: 10px"></div>
+            <div style="margin-bottom: 20px"></div>
             <?php foreach (Request::get('list') as $item):?>
                 <a href="/article?id=<?php echo $item['id']?>" data-no-cache="true">
                     <?php $images=explode('$$',$item['images']) ?>
