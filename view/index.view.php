@@ -130,8 +130,8 @@
         </div>
         <div class="content-block">
             <div class="row">
-                <div class="col-50"><a class="button button-fill button-success">登录</a></div>
-                <div class="col-50"><a class="button button-fill button-danger close-popup">取消</a></div>
+                <div class="col-50"><a class="button button-fill button-big">登录</a></div>
+                <div class="col-50"><a class="button button-fill button-big button-danger close-popup">取消</a></div>
             </div>
             <div class="row">
                 <br>
@@ -193,8 +193,8 @@
         </div>
         <div class="content-block">
             <div class="row">
-                <div class="col-50"><a class="button button-fill button-success">提交</a></div>
-                <div class="col-50"><a class="button button-fill button-danger close-popup">取消</a></div>
+                <div class="col-50"><a class="button button-fill button-big">提交</a></div>
+                <div class="col-50"><a class="button button-fill button-big button-danger close-popup">取消</a></div>
             </div>
             <div class="row">
                 <br>
