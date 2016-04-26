@@ -93,30 +93,49 @@ function addfavourite(){
 
 //登陆
 function login(){
-
+    $.post('/user/login', $('#loginform').serialize(),function(data){
+        if(data.code==1){
+            localStorage.setItem('userinfo',JSON.stringify(data.user));
+            initlogin('登录成功');
+        }
+        else{
+            $.toast(data.msg);
+        }
+    },'json');
 }
 
 //注册
 function regist(){
     $.post('/user/regist', $('#registform').serialize(),function(data){
         if(data.code==1){
-            $.alert('注册成功');
+            $.post('/user/login', $('#registform').serialize(),function(data){
+                if(data.code==1){
+                    localStorage.setItem('userinfo',JSON.stringify(data.user));
+                    initlogin('注册成功');
+                }
+            },'json');
         }
         else{
-            $.alert(data.msg);
+            $.toast(data.msg);
         }
-    });
+    },'json');
 }
 
 //初始化登陆
-function initlogin(){
+function initlogin(tip){
     if(localStorage.getItem('userinfo')!=null){
         var user=JSON.parse(localStorage.getItem('userinfo'));
+        $('#username').html('用户：'+user.name);
+        $.closeModal();
+        $.closePanel();
+    }
+    if(tip!=false){
+        $.toast(tip);
     }
 }
 
 //初始化所有组件
 $(function(){
     $.init();
-    initlogin();
+    initlogin(false);
 });

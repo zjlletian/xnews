@@ -57,4 +57,19 @@ abstract class Model{
         }
         return DB::query($sql);
     }
+
+    //where查找
+    function getOne($where=null){
+        $sql="SELECT * FROM `{$this->tname}` ";
+        if($where!=null){
+            $sql.=$where;
+        }
+        $list=DB::query($sql);
+        if(empty($list)){
+            return null;
+        }
+        else{
+            return $list[0];
+        }
+    }
 }

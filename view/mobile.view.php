@@ -85,7 +85,7 @@
 <div class="panel panel-left panel-reveal" id="userpanel">
     <div class="content-block">
         <p>用户中心</p>
-        <p>用户名：xxx</p>
+        <p id="username">用户名：xxx</p>
         <p><a class="button button-link">注销</a> </p>
     </div>
 </div>
@@ -112,7 +112,7 @@
                             <div class="item-media"><i class="icon icon-form-name"></i></div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <input type="text" placeholder="注册邮箱">
+                                    <input type="text" placeholder="用户名" name="username">
                                 </div>
                             </div>
                         </div>
@@ -122,7 +122,7 @@
                             <div class="item-media"><i class="icon icon-form-password"></i></div>
                             <div class="item-inner">
                                 <div class="item-input">
-                                    <input type="password" placeholder="密码">
+                                    <input type="password" placeholder="密码" name="password">
                                 </div>
                             </div>
                         </div>

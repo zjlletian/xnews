@@ -8,8 +8,10 @@ class UserInfoModel extends Model{
     }
 
     //检查用户名密码是否正确
-    function check($name,$password){
-        $password=md5($password);
+    function check($name,$password,$enc=true){
+        if($enc){
+            $password=md5($password);
+        }
         $user=$this->getlist("where name='{$name}' AND password='{$password}' ");
         if(empty($user)){
             return false;

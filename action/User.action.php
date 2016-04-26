@@ -12,9 +12,19 @@ class UserController extends Controller{
 
     //用户登录
     function login(){
+        $result=array('code'=>1);
         if(Request::method()=="POST"){
-
+            $user=(new UserInfoModel())->check($_POST['username'], $_POST['password']);
+            if(!empty($user)){
+                $_SESSION['user']= $user;
+                $result['user']=$user;
+            }
+            else{
+                $result['code']=0;
+                $result['msg']='用户名密码错误';
+            }
         }
+        $this->json($result);
     }
 
     //用户注册
@@ -22,12 +32,19 @@ class UserController extends Controller{
         $result=array('code'=>1);
         $usermodel=new UserInfoModel();
         $userinfo=array('name'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($_POST['password']));
-        if($usermodel->insert($userinfo)){
-            
+        if(!empty($usermodel->getOne("where name='{$_POST['username']}'"))){
+            $result['code']=0;
+            $result['msg']='用户名已存在';
         }
-        else{
-
+        elseif(!empty($usermodel->getOne("where email='{$_POST['email']}'"))){
+            $result['code']=0;
+            $result['msg']='邮箱已被使用';
         }
+        elseif(!$usermodel->insert($userinfo)){
+            $result['code']=0;
+            $result['msg']='写入数据库失败';
+        }
+        $this->json($result);
     }
 
     //分类列表
