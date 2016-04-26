@@ -15,7 +15,6 @@ $(document).on("closed", ".panel", function() {
 function closepanel(){
     if(panelopened){
         $.closePanel();
-        panelopened=false;
     }
 }
 
@@ -42,9 +41,26 @@ function openarticel(url){
     $.router.load(url, true);
 }
 
-//ajax加载其他页面
+//打开登陆页面
+function openlogin(){
+    $.closeModal();
+    $.popup('#login');
+}
+
+//打开注册页面
+function openregist(){
+    $.closeModal();
+    $.popup('#regist');
+}
+
+//ajax加载其他页面开始
 $(window).on("pageLoadStart",function() {
     $.showIndicator();
+});
+
+//ajax加载其他页面完成
+$(window).on("pageLoadComplete",function() {
+    //$.router.load("#articlepage");
 });
 
 //下拉刷新

@@ -77,8 +77,8 @@
 <div class="panel panel-left panel-reveal" id="loginpanel">
     <div class="content-block">
         <p>用户中心</p>
-        <p><a class="button button-link" onclick="$.popup('#login')">登录</a> </p>
-        <p><a class="button button-link" onclick="$.popup('#regist')">注册</a> </p>
+        <p><a class="button button-link" onclick="openlogin()">登录</a> </p>
+        <p><a class="button button-link" onclick="openregist()">注册</a> </p>
     </div>
 </div>
 
@@ -101,16 +101,106 @@
 <!-- 登录 -->
 <div class="popup" id="login">
     <div class="content-block">
-        <p>用户登录</p>
-        <p><a class="close-popup">取消</a></p>
+        <div style="width: 100%; padding-left: 10%">
+            xnews - 用户登录
+        </div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-name"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="用户名或邮箱">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-password"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="password" placeholder="密码">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <div class="row">
+                <div class="col-50"><a class="button button-fill button-success">登录</a></div>
+                <div class="col-50"><a class="button button-fill button-danger close-popup">取消</a></div>
+            </div>
+            <div class="row">
+                <br>
+                <div class="col-100" style="text-align: center"><a  href="javascript:openregist()">没有账户？ 注册一个吧</a></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- 注册 -->
 <div class="popup" id="regist">
     <div class="content-block">
-        <p>新用户注册</p>
-        <p><a class="close-popup">取消</a></p>
+        <div style="width: 100%; padding-left: 10%">
+            xnews - 新用户注册
+        </div>
+        <div class="list-block">
+            <ul>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-name"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="text" placeholder="用户名">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-email"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="email" placeholder="常用邮箱">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-password"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="password" placeholder="密码">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="item-content">
+                        <div class="item-media"><i class="icon icon-form-password"></i></div>
+                        <div class="item-inner">
+                            <div class="item-input">
+                                <input type="password" placeholder="确认密码">
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="content-block">
+            <div class="row">
+                <div class="col-50"><a class="button button-fill button-success">提交</a></div>
+                <div class="col-50"><a class="button button-fill button-danger close-popup">取消</a></div>
+            </div>
+            <div class="row">
+                <br>
+                <div class="col-100" style="text-align: center"><a href="javascript:openlogin()">已有账户？ 赶快登录吧</a></div>
+            </div>
+        </div>
     </div>
 </div>
 

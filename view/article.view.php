@@ -4,7 +4,7 @@ $article=Request::get('article');
 ?>
 <div class="page-group">
     <div class="page" id='articlepage'>
-        <input type="hidden" id="pagename" value="article">
+        <input type="hidden" id="articleid" value="<?php echo $article['id']?>">
         <header class="bar bar-nav">
             <a class="icon icon-left pull-left back"></span></a>
             <h1 class="title" id="maintitle">Xnews - 文章详情</h1>
