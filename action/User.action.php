@@ -31,7 +31,7 @@ class UserController extends Controller{
     function regist(){
         $result=array('code'=>1);
         $usermodel=new UserInfoModel();
-        $userinfo=array('name'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($_POST['password']));
+        $userinfo=array('name'=>$_POST['username'],'email'=>$_POST['email'],'password'=>md5($_POST['password']),'book'=>0);
         if(!empty($usermodel->getOne("where name='{$_POST['username']}'"))){
             $result['code']=0;
             $result['msg']='用户名已存在';

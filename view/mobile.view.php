@@ -74,19 +74,16 @@
 </div>
 
 <!-- 用户中心 -->
-<div class="panel panel-left panel-reveal" id="loginpanel">
-    <div class="content-block">
+<div class="panel panel-left panel-reveal" id="userpanel">
+    <div class="content-block unlogin">
         <p>用户中心</p>
         <p><a class="button button-link" onclick="openlogin()">登录</a> </p>
         <p><a class="button button-link" onclick="openregist()">注册</a> </p>
     </div>
-</div>
-
-<div class="panel panel-left panel-reveal" id="userpanel">
-    <div class="content-block">
+    <div class="content-block logined">
         <p>用户中心</p>
         <p id="username">用户名：xxx</p>
-        <p><a class="button button-link">注销</a> </p>
+        <p><a class="button button-link" onclick="outlogin()">注销</a> </p>
     </div>
 </div>
 

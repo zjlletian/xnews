@@ -20,12 +20,7 @@ function closepanel(){
 
 //打开左侧栏
 function leftpanel(){
-    if (localStorage.getItem('userinfo') != null) {
-        $.openPanel("#userpanel");
-    }
-    else {
-        $.openPanel("#loginpanel");
-    }
+    $.openPanel("#userpanel");
 }
 
 //打开右侧栏
@@ -91,12 +86,17 @@ function addfavourite(){
     }
 }
 
-//登陆
-function login(){
-    $.post('/user/login', $('#loginform').serialize(),function(data){
+//注册
+function regist(){
+    $.post('/user/regist', $('#registform').serialize(),function(data){
         if(data.code==1){
-            localStorage.setItem('userinfo',JSON.stringify(data.user));
-            initlogin('登录成功');
+            $.post('/user/login', $('#registform').serialize(),function(data){
+                if(data.code==1){
+                    $.closeModal();
+                    localStorage.setItem('userinfo',JSON.stringify(data.user));
+                    initlogin('注册成功');
+                }
+            },'json');
         }
         else{
             $.toast(data.msg);
@@ -104,16 +104,13 @@ function login(){
     },'json');
 }
 
-//注册
-function regist(){
-    $.post('/user/regist', $('#registform').serialize(),function(data){
+//登陆
+function login(){
+    $.post('/user/login', $('#loginform').serialize(),function(data){
         if(data.code==1){
-            $.post('/user/login', $('#registform').serialize(),function(data){
-                if(data.code==1){
-                    localStorage.setItem('userinfo',JSON.stringify(data.user));
-                    initlogin('注册成功');
-                }
-            },'json');
+            $.closeModal();
+            localStorage.setItem('userinfo',JSON.stringify(data.user));
+            initlogin('登录成功');
         }
         else{
             $.toast(data.msg);
@@ -126,12 +123,25 @@ function initlogin(tip){
     if(localStorage.getItem('userinfo')!=null){
         var user=JSON.parse(localStorage.getItem('userinfo'));
         $('#username').html('用户：'+user.name);
-        $.closeModal();
-        $.closePanel();
+        $('.unlogin').css('display','none');
+        $('.logined').css('display','');
+        if(tip!=false){
+            $.toast(tip);
+        }
     }
-    if(tip!=false){
-        $.toast(tip);
+    else{
+        $('.unlogin').css('display','');
+        $('.logined').css('display','none');
     }
+}
+
+//退出登录
+function outlogin(){
+    $.confirm('确认注销登录?', function () {
+        localStorage.removeItem('userinfo');
+        $('.unlogin').css('display','');
+        $('.logined').css('display','none');
+    });
 }
 
 //初始化所有组件
