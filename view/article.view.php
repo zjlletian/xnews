@@ -14,7 +14,7 @@ $article=Request::get('article');
             <div class="content-block">
                 <div class="article-header">
                     <h3 class="article-title"><?php echo $article['title']?></h3>
-                    <div class="article-info"><?php echo $article['alias'].' '.substr(Util::timestr($article['time']),0,16)?> &nbsp;&nbsp;阅读 <?php echo $article['view']?></div>
+                    <div class="article-info"><?php echo  $article['alias'].' · '.substr(Util::timestr($article['time']),0,16)?> · 阅读 <?php echo $article['view']?></div>
                 </div>
                 <div class="article-content">
                     <?php
