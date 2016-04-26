@@ -6,7 +6,12 @@ class IndexController extends Controller{
     //默认访问入口
     function emptymethod(){
         parent::emptymethod();
-        $this->index();
+        if(Util::isMobileRequest()){
+            $this->index();
+        }
+        else{
+            $this->view('index');
+        }
     }
 
     //首页
@@ -14,6 +19,6 @@ class IndexController extends Controller{
         $model=new ArticleModel();
         $list=$model->getArticelByTag();
         Request::put('list',$list);
-        $this->view('index');
+        $this->view('mobile');
     }
 }

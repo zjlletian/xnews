@@ -91,10 +91,27 @@ function addfavourite(){
     }
 }
 
+//登陆
+function login(){
+
+}
+
+//注册
+function regist(){
+    $.post('/user/regist', $('#registform').serialize(),function(data){
+        if(data.code==1){
+            $.alert('注册成功');
+        }
+        else{
+            $.alert(data.msg);
+        }
+    });
+}
+
 //初始化登陆
 function initlogin(){
     if(localStorage.getItem('userinfo')!=null){
-
+        var user=JSON.parse(localStorage.getItem('userinfo'));
     }
 }
 
