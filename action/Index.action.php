@@ -6,7 +6,12 @@ class IndexController extends Controller{
     //默认访问入口
     function emptymethod(){
         parent::emptymethod();
-        $this->index();
+        if(Util::isMobileRequest()){
+            $this->index();
+        }
+        else{
+            $this->view('index');
+        }
     }
 
     //首页
