@@ -29,7 +29,7 @@ $article=Request::get('article');
                 <div class="article-content">
                     <?php
                     echo $article['content'];
-                    if(!strpos($article['images'],'#@#@#')){
+                    if(!Util::strStartWith($article['images'],'#@#@#')){
                         foreach (explode("$$",$article["images"]) as $img){
                             if(!strstr($img,'@@')){
                                 echo "<img src='{$img}' style='max-width: 100%' /><br><br>";
