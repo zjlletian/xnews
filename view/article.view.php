@@ -29,14 +29,16 @@ $article=Request::get('article');
                 <div class="article-content">
                     <?php
                     echo $article['content'];
-                    foreach (explode("$$",$article["images"]) as $img){
-                        if(!strstr($img,'@@')){
-                            echo "<img src='{$img}' style='max-width: 100%' /><br><br>";
-                        }
-                        else{
-                            $img=explode('@@',$img);
-                            echo "<img src='{$img[0]}' style='max-width: 100%'/><br>";
-                            echo "$img[1]<br><br>";
+                    if(!strpos($article['images'],'#@#@#')){
+                        foreach (explode("$$",$article["images"]) as $img){
+                            if(!strstr($img,'@@')){
+                                echo "<img src='{$img}' style='max-width: 100%' /><br><br>";
+                            }
+                            else{
+                                $img=explode('@@',$img);
+                                echo "<img src='{$img[0]}' style='max-width: 100%'/><br>";
+                                echo "$img[1]<br><br>";
+                            }
                         }
                     }
                     ?>

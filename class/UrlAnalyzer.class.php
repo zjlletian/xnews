@@ -140,22 +140,25 @@ class UrlAnalyzer{
 
 		//提取图片
 		$imgs=array();
-		if(!empty($imgRules)){
-			$baseurl=self::urlSplit($url);
-			foreach ($htmldom[$imgRules] as $img){
-				$href=$img->getAttribute('src');
-				$link=self::transformHref($href, $baseurl);
-				$alt=$img->getAttribute('alt');
-				if(!empty($alt)){
-					$link.="@@".$alt;
-				}
-				if($link!=false && !in_array($link,$imgs)){
-					$imgs[]=$link;
-				}
-			}
-			$urlinfo['images'] = implode("$$",$imgs);
+		if(empty($imgRules)){
+			$imgRules=$contentRule." img";
 		}
-
+		$baseurl=self::urlSplit($url);
+		foreach ($htmldom[$imgRules] as $img){
+			$href=$img->getAttribute('src');
+			$link=self::transformHref($href, $baseurl);
+			$alt=$img->getAttribute('alt');
+			if(!empty($alt)){
+				$link.="@@".$alt;
+			}
+			if($link!=false && !in_array($link,$imgs)){
+				$imgs[]=$link;
+			}
+		}
+		$urlinfo['images'] = implode("$$",$imgs);
+		if($imgRules==$contentRule." img"){
+			$urlinfo['images']="#@#@#".$urlinfo['images'];
+		}
 		//清理phpquery
 		phpQuery::$documents = array();
 		return $urlinfo;

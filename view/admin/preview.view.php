@@ -16,14 +16,16 @@
     <br>
     <?php
         echo $article['content'];
-        $imgs=explode("$$",$article["images"]);
-        foreach ($imgs as $img){
-            if(!strstr($img,'@@')){
-                echo "<img src='{$img}'/><br><br>";
-            }
-            else{
-                $img=explode('@@',$img);
-                echo "<img src='{$img[0]}'/><br>$img[1]<br><br>";
+        if(!strpos($article['images'],'#@#@#')){
+            foreach (explode("$$",$article["images"]) as $img){
+                if(!strstr($img,'@@')){
+                    echo "<img src='{$img}' style='max-width: 100%' /><br><br>";
+                }
+                else{
+                    $img=explode('@@',$img);
+                    echo "<img src='{$img[0]}' style='max-width: 100%'/><br>";
+                    echo "$img[1]<br><br>";
+                }
             }
         }
     ?>
