@@ -80,8 +80,9 @@ CREATE TABLE `favourite` (
   `article_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `time` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `article_id` (`article_id`,`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of favourite
@@ -151,17 +152,3 @@ CREATE TABLE `userinfo` (
 -- Records of userinfo
 -- ----------------------------
 
--- ----------------------------
--- Table structure for usertags
--- ----------------------------
-DROP TABLE IF EXISTS `usertags`;
-CREATE TABLE `usertags` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_id` int(11) NOT NULL,
-  `tag_id` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of usertags
--- ----------------------------

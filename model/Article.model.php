@@ -10,7 +10,7 @@ class ArticleModel extends Model{
     //获取对应列表数量
     function getArticleCount($sourceid=null){
         $s=$sourceid==null?'':' AND article.source_id='.$sourceid;
-        return count(DB::query("SELECT article.*, source.alias, tag.tagname FROM article, source, tag WHERE  source.tag_id=tag.id AND article.source_id=source.id AND article.status=1 {$s}"));
+        return DB::query("SELECT count(*) as c FROM article, source, tag WHERE  source.tag_id=tag.id AND article.source_id=source.id AND article.status=1 {$s}")[0]['c'];
     }
 
     //获取列表
@@ -21,9 +21,8 @@ class ArticleModel extends Model{
     }
 
     //获取最新的文章列表
-    function getArticelByTag($from=null,$tagid=null){
-        $s=$from==null?'':" AND article.id<{$from} ";
-        $s.=$tagid==null?'':' AND source.tag_id='.$tagid;
+    function getArticelByTag($tagid=null){
+        $s=$tagid==null?'':' AND source.tag_id='.$tagid;
         return DB::query("SELECT article.*, source.alias, tag.tagname FROM article, source, tag WHERE  source.tag_id=tag.id AND article.source_id=source.id AND article.status=1 {$s} ORDER BY article.time DESC limit 50");
     }
 

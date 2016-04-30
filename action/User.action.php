@@ -14,7 +14,12 @@ class UserController extends Controller{
     function login(){
         $result=array('code'=>1);
         if(Request::method()=="POST"){
-            $user=(new UserInfoModel())->check($_POST['username'], $_POST['password']);
+            if(!isset($_GET['relogin'])){
+                $user=(new UserInfoModel())->check($_POST['username'], $_POST['password']);
+            }
+            else{
+                $user=(new UserInfoModel())->check($_POST['username'], $_POST['password'],false);
+            }
             if(!empty($user)){
                 $_SESSION['user']= $user;
                 $result['user']=$user;
@@ -47,9 +52,54 @@ class UserController extends Controller{
         $this->json($result);
     }
 
+    //退出登录
+    function logout(){
+        $this->cheklogin();
+        unset($_SESSION['user']);
+    }
+
     //分类列表
     function tags(){
         $tags=(new TagModel())->getlist();
         $this->json($tags);
+    }
+
+    //收藏列表
+    function favlist(){
+        $this->cheklogin();
+        $model=new FavouriteModel();
+        $list=$model->getFavList($_SESSION['user']['id']);
+        Request::put('list',$list);
+        $this->view('favlist');
+    }
+
+    //是否添加收藏
+    function isFav(){
+        $this->cheklogin();
+        echo (new FavouriteModel())->isFavourite($_POST['uid'],$_POST['aid'])? 1:0;
+    }
+
+    //添加收藏
+    function addFav(){
+        $this->cheklogin();
+        echo (new FavouriteModel())->addFavourite($_POST['uid'],$_POST['aid'])? 1:0;
+    }
+
+    //移除收藏
+    function delFav(){
+        $this->cheklogin();
+        echo (new FavouriteModel())->removeFavourite($_POST['uid'],$_POST['aid'])? 1:0;
+    }
+
+    //提交评论
+    function addComment(){
+        $commentModel=new CommentsModel();
+        $commentModel->insert(array(
+            'user_id'=>$_POST['uid'],
+            'article_id'=>$_POST['aid'],
+            'comment'=>$_POST['comment'],
+            'time'=>time()
+        ));
+        echo substr(Util::timestr(time()),0,16);
     }
 }

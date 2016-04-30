@@ -7,18 +7,25 @@ class IndexController extends Controller{
     function emptymethod(){
         parent::emptymethod();
         if(Util::isMobileRequest()){
-            $this->index();
+            $this->view('mobile');
         }
         else{
             $this->view('index');
         }
     }
 
-    //首页
-    function index() {
+    //新闻列表
+    function newslist(){
         $model=new ArticleModel();
-        $list=$model->getArticelByTag();
+        $list=$model->getArticelByTag($_GET['t']);
         Request::put('list',$list);
-        $this->view('mobile');
+        $this->view('newslist');
+    }
+
+    //获取所有分类
+    function tags() {
+        $model=new TagModel();
+        $list=$model->getlist();
+        $this->json($list);
     }
 }

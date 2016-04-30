@@ -40,7 +40,7 @@
                 <tr><th>标题</th><th>来源</th><th>分类</th><th>添加时间</th><th>删除文章</th></tr>
                 <?php foreach (Request::get('list') as $item):?>
                     <tr>
-                        <td><a href="/article?id=<?php echo $item['id']?>" target="_blank"><?php echo $item['title']?></a></td>
+                        <td><a href="/article?id=<?php echo $item['id']?>&pre" target="_blank"><?php echo $item['title']?></a></td>
                         <td><?php echo $item['alias']?></td>
                         <td><?php echo $item['tagname']?></td>
                         <td><?php echo Util::timestr($item['time'])?></td>

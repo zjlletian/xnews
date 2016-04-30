@@ -19,12 +19,21 @@ class ArticleController extends Controller{
         if(null == $article=$articelmodel->getArticle($_GET['id'])){
             $this->notfind();
         }
-        $articelmodel->increaseView($article['id']);
         Request::put('article',$article);
         if(isset($_GET['pre'])){
             $this->view('admin/preview');
         }
         else{
+            $articelmodel->increaseView($article['id']);
+            if(isset($_SESSION['user']) && (new FavouriteModel())->isFavourite($_SESSION['user']['id'],$article['id'])){
+                Request::put('fav',true);
+            }
+            else{
+                Request::put('fav',false);
+            }
+            $commentModel=new CommentsModel();
+            $comments=$commentModel->getArticleComment($article['id']);
+            Request::put('comments',$comments);
             $this->view('article');
         }
     }

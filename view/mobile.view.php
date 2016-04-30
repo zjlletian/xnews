@@ -24,51 +24,7 @@
                 <div class="preloader">下拉刷新新闻列表</div>
                 <div class="pull-to-refresh-arrow"></div>
             </div>
-            <div style="margin-bottom: 12px"></div>
-            <?php foreach (Request::get('list') as $item):?>
-                <a onclick="openarticel('/article?id=<?php echo $item['id']?>')">
-                    <?php $images=explode('$$',$item['images']) ?>
-                    <div class="card" style="margin-top: -6px; width=100%">
-                        <?php if(empty($images[0])):?>
-                            <!-- 无图标题 -->
-                            <div class="card-content">
-                                <div class="card-content-inner">
-                                    <div class="newstitle"><?php echo $item['title']?></div>
-                                    <div class="titleinfo"><?php echo  $item['alias'].' · '.substr(Util::timestr($item['time']),0,16)?> · 阅读 <?php echo $item['view']?></div>
-                                </div>
-                            </div>
-                        <?php endif;?>
-
-                        <?php if(!empty($images[0]) && count($images)<3):?>
-                            <!-- 单图片标题 -->
-                            <div class="card-content">
-                                <div class="card-content-inner" style="height: 90px">
-                                    <div style="float:left; width: 65%; height: 100%">
-                                        <div class="newstitle"><?php echo $item['title']?></div>
-                                        <div class="titleinfo"><?php echo  $item['alias'].' · '.substr(Util::timestr($item['time']),0,16)?> · 阅读 <?php echo $item['view']?></div>
-                                    </div>
-                                    <div style="float:left; width:32%; height: 65px; margin-left: 2%; text-align: center;">
-                                        <img src="<?php echo strstr($images[0],'@@')?explode('@@',$images[0])[0]:$images[0]; ?>" style="width: 100%; height: 100%">
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endif;?>
-
-                        <?php if(!empty($images[0]) && count($images)>=3):?>
-                            <!-- 三图片标题 -->
-                            <div class="card-content">
-                                <div class="card-content-inner">
-                                    <div class="newstitle"><?php echo $item['title']?></div>
-                                    <img src="<?php echo strstr($images[0],'@@')?explode('@@',$images[0])[0]:$images[0]; ?>" style="width: 32%; height: 65px; ">
-                                    <img src="<?php echo strstr($images[1],'@@')?explode('@@',$images[2])[0]:$images[1]; ?>" style="width: 32%; height: 65px; ">
-                                    <img src="<?php echo strstr($images[1],'@@')?explode('@@',$images[2])[0]:$images[1]; ?>" style="width: 32%; height: 65px; ">
-                                    <div class="titleinfo"><?php echo  $item['alias'].' · '.substr(Util::timestr($item['time']),0,16)?> · 阅读 <?php echo $item['view']?></div>
-                                </div>
-                            </div>
-                        <?php endif;?>
-                    </div>
-                </a>
-            <?php endforeach; ?>
+            <div id="newslist" style="margin-top: 12px"></div>
         </div>
     </div>
 </div>
@@ -80,18 +36,19 @@
         <p><a class="button button-link" onclick="openlogin()">登录</a> </p>
         <p><a class="button button-link" onclick="openregist()">注册</a> </p>
     </div>
-    <div class="content-block logined">
+    <div class="content-block logined" style="display: none">
         <p>用户中心</p>
         <p id="username">用户名：xxx</p>
-        <p><a class="button button-link" onclick="outlogin()">注销</a> </p>
+        <p><a class="button button-link" onclick="favlist()">收藏列表</a> </p>
+        <p><a class="button button-link" onclick="logout()">退出登录</a> </p>
     </div>
 </div>
 
 <!-- 分类选择 -->
 <div class="panel panel-right panel-reveal" id="tagpanel">
     <div class="content-block">
-        <p>分类选择</p>
-        <p></p>
+        <p>&nbsp;&nbsp;&nbsp;分类选择</p>
+        <div id="taglist"></div>
     </div>
 </div>
 
