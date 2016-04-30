@@ -57,7 +57,7 @@
                 <li><a href="/comments/">评论管理</a></li>
             </ul>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-10">
             <h3 style="display:inline;">源链接列表</h3>&nbsp;&nbsp;&nbsp;
             <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#myModal" style="margin-top:-8px">添加源</button>
             <br><br>

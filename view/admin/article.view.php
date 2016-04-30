@@ -21,7 +21,7 @@
                 <li><a href="/comments/">评论管理</a></li>
             </ul>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <form class="form-inline">
                 <h3 style="display:inline;">文章列表</h3>&nbsp;&nbsp;&nbsp;
                 <select class="form-control input-sm"  id="source" style="margin-top:-8px">
