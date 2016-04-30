@@ -4,7 +4,7 @@
 
 <?php foreach (Request::get('list') as $item):?>
     <a onclick="openarticel('/article?id=<?php echo $item['id']?>')">
-        <?php $images=explode('$$',ltrim($item['images']),'#@#@#') ?>
+        <?php $images=explode('$$',ltrim($item['images'],'#@#@#')) ?>
         <div class="card" style="margin-top: -6px; width=100%">
             <?php if(empty($images[0])):?>
                 <!-- 无图标题 -->
