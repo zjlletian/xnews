@@ -204,8 +204,8 @@ $(document).on('refresh', '.pull-to-refresh-content',function(e) {
 
 //加载收藏列表
 function favlist(){
-    $.router.load('/user/favlist', true);
     $.closePanel();
+    $.router.load('/user/favlist', true);
 }
 
 //提交评论
