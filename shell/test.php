@@ -1,4 +1,4 @@
 <?php
 require_once(dirname(dirname(__FILE__)) . '/autoload.php');
 
-echo UrlAnalyzer::getHtml($argv[1])."\n";
+var_dump(UrlAnalyzer::getInfo($argv[1],$argv[2],$argv[3],$argv[4]));

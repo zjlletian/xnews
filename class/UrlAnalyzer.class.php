@@ -65,7 +65,7 @@ class UrlAnalyzer{
 				}
 			}
 			//过滤js与css
-			$reg=array("'<script[^>]*?>.*?</script>'si", "'<style[^>]*?>.*?</style>'si" , '@style=\".*\"@','@style=\\\'.*\\\'@');
+			$reg=array("'<script[^>]*?>.*?</script>'si", "'<style[^>]*?>.*?</style>'si" , "'style=\'.*?\''si", "'style=\".*?\"'si");
 			$htmltext = preg_replace($reg,'', $htmltext);
 		}
 		catch(Exception $e) {
@@ -77,7 +77,7 @@ class UrlAnalyzer{
 			return $htmltext;
 		}
 	}
-
+	
 	//从meta中获取contentType数组：[ doctype , charset ]（从phpquery中提取）
 	static function contentTypeFromMeta($markup) {
 		$matches = array();
@@ -133,10 +133,9 @@ class UrlAnalyzer{
 		$content=strip_tags($content, "<p><strong><img>");
 
 		//合并多个空格与空段落
-		$content=strtr($content, array("\t"=>"", "\n"=>""," "=>"","[微博]"=>""));
+		$content=strtr($content, array("\t"=>"", "\n"=>"","[微博]"=>""));
 		$content=preg_replace("/<p><\/p>/","",$content);
-		$content=preg_replace("/[\s]+/","",$content);
-		$content=preg_replace("/<p>　&gt;&gt;&gt;&gt;点击试听《(.*)》<\/p>/","",$content);
+		$content=preg_replace("/<p>[\s]+&gt;&gt;&gt;&gt;点击试听《(.*)》<\/p>/","",$content);
 		$urlinfo['content']=$content;
 
 		//提取图片
